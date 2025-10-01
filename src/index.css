@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+:root {
+    --color-white-col: hsl(0, 0%, 100%);
+    --color-gray-col: #F3F3F3;
+    --color-green-col: #049F83;
+    --color-border-col: #DDE0E2;
+    --color-red-col: #DD302C;
+    --color-dark-gray: #88898B;
+    --color-black-col: #181818;
+    --color-yellow-col: #FFEDBA;
+    --color-orange-col: #CC6821;
+}
+:root[theme="dark"] {
+
+}
+@theme {
+    --color-white-col: var(--color-white-col);
+    --color-gray-col: var(--color-gray-col);
+    --color-green-col: var(--color-green-col);
+    --color-border-col: var(--color-border-col);
+    --color-red-col: var(--color-red-col);
+    --color-dark-gray: var(--color-dark-gray);
+    --color-black-col: var(--color-black-col);
+    --color-yellow-col: var(--color-yellow-col);
+    --color-orange-col: var(--color-orange-col);
+
+}
+
+body{
+    color: var(--color-black-col);
+}
+button, a {
+    cursor: pointer;
+}
