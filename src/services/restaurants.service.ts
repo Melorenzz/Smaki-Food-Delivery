@@ -9,4 +9,8 @@ export const RestaurantsService = {
         const res = await axiosInstance.get(`restaurants/get-restaurant/${id}`)
         return res.data.data;
     },
+    getRestaurants: async () => {
+        const res = await axiosInstance.get('restaurants/get-restaurants')
+        return res.data.data;
+    }
 }

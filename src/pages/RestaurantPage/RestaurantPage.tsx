@@ -36,7 +36,7 @@ const RestaurantPage = () => {
             <MainLayout>
                 <div className='grid grid-cols-2 gap-[20px] mt-[40px]'>
                     {products?.products?.map((product) => (
-                        <ProductCard product={product} />
+                        <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
             </MainLayout>
