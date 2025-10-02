@@ -5,7 +5,7 @@ import {PlusCircleIcon} from "@heroicons/react/24/outline";
 const ProductCard = ({product}: {product: IProductCard}) => {
     return (
         <div className='bg-white-col p-[20px] flex items-center gap-[20px] rounded-[36px]'>
-            <Img className='max-w-[295px] aspect-square' src={product.image} />
+            <Img className='max-w-[295px] aspect-square object-contain' src={product.image} />
             <div className='h-full w-full flex flex-col'>
                 <div className='flex flex-col gap-[8px]'>
                     <span className='text-dark-gray text-[14px]'>{product.weight} г</span>

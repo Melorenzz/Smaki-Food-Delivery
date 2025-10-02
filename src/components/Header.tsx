@@ -5,11 +5,13 @@ import {useState} from "react";
 import Modal from "./Modal.tsx";
 import {useRequestOtp} from "../hooks/useRequestOtp.ts";
 import {useNavigate} from "react-router";
+import Navigation from "./Navigation.tsx";
 // import {useOauth} from "../hooks/useOauth.ts";
 
 const Header = () => {
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [isOpenAuth, setIsOpenAuth] = useState(false);
+    const [isOpenNavigation, setIsOpenNavigation] = useState(false);
     const { mutate, isPending, isSuccess, isError } = useRequestOtp();
     // const { mutate, isPending, isSuccess, isError } = useOauth();
 
@@ -46,7 +48,7 @@ const Header = () => {
         <header className='rounded-bl-4xl rounded-br-4xl bg-white-col shadow py-[20px] w-screen'>
             <MainLayout >
                 <div className="w-full flex justify-between">
-                    <button className='rounded-2xl border-2 p-[6px]'>
+                    <button  onClick={() => setIsOpenNavigation(true)} className='rounded-2xl border-2 p-[6px]'>
                         <Bars3Icon className='w-[32px]' />
                     </button>
                     <img className='cursor-pointer' onClick={() => navigate('/')} src="/images/icons/logo.svg" alt="logo"/>
@@ -82,6 +84,11 @@ const Header = () => {
                     </Modal.Body>
                 </Modal>
             )}
+
+            {isOpenNavigation && (
+                <Navigation setIsOpenNavigation={setIsOpenNavigation} />
+            )}
+
         </header>
     );
 };

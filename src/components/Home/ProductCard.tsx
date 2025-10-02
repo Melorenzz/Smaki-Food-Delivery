@@ -1,14 +1,15 @@
 import Img from "../Img.tsx";
 import type {IProductCard} from "../../types/types.ts";
 import {PlusCircleIcon} from "@heroicons/react/16/solid";
+import {Link} from "react-router";
 
 
 const ProductCard = ({product}: {product: IProductCard}) => {
     return (
         <div className='bg-white-col flex flex-col rounded-[36px] shadow p-[20px]'>
-            <div className='aspect-square w-full '>
-                <Img src={product.image} className='w-full h-full object-contain'  />
-            </div>
+            <Link to={`/product/${product.id}`} className='aspect-square w-full '>
+                <Img src={product.image} alt={product?.name} className='w-full h-full object-contain'  />
+            </Link>
             <div className=' my-[12px] flex flex-col gap-[8px]'>
                 <span className='text-[14px] text-dark-gray'>{product.weight} г</span>
                 <h3 className='font-bold text-[20px] line-clamp-2'>{product.name}</h3>
