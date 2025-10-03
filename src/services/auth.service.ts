@@ -2,7 +2,11 @@
         requestOtp: async (phone: string) => {
             return axiosInstance.post('/auth/otp', {phone})
         },
-        oAuth: async (email) => {
+        verifyOtp: async (phone: string, code: string) => {
+            console.log("➡️ Отправка:", { phone, code });
+            return axiosInstance.post('/auth/otp-verify', {phone, code})
+        },
+        oAuth: async (email: string) => {
             try {
                 console.log('zdes')
                 const res = await axiosInstance.post('/auth/oauth', email);

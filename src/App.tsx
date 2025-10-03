@@ -7,6 +7,7 @@ import ScrollToTop from "./components/ScrollToTop.ts";
 import ProductPage from "./pages/ProductPage/ProductPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage.tsx";
 import Page404 from "./pages/404/404.tsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.tsx";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
                     <Route path='/restaurant/:id' element={<RestaurantPage />} />
                     <Route path='/product/:id' element={<ProductPage />} />
                     <Route path='/restaurants' element={<RestaurantsPage />} />
+                    <Route path='/profile' element={<ProfilePage />} />
                     <Route path='*' element={<Page404 />} />
                 </Routes>
             </main>

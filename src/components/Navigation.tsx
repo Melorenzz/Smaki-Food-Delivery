@@ -24,10 +24,10 @@ const Navigation = ({setIsOpenNavigation}: INavigation) => {
 
     return createPortal (
             <div onClick={() => setIsOpenNavigation(false)} className='fixed top-0 left-0 inset-0 bg-black/30 z-50'>
-                <aside onClick={(e) => e.stopPropagation()} className='h-screen flex flex-col max-w-[380px] w-full rounded-r-[30px] fixed top-0 left-0 bg-white-col p-[20px]'>
+                <aside onClick={(e) => e.stopPropagation()} className='h-screen flex flex-col max-w-[270px] sm:max-w-[380px] w-full rounded-r-[30px] fixed top-0 left-0 bg-white-col p-[20px]'>
                     <div className='flex items-center justify-between'>
-                        <img src="/images/icons/logo.svg" alt="logo"/>
-                        <button onClick={() => setIsOpenNavigation(false)} className='w-[44px] aspect-square p-[6px]'>
+                        <img className='sm:max-w-[200px] max-w-[150px] ' src="/images/icons/logo.svg" alt="logo"/>
+                        <button onClick={() => setIsOpenNavigation(false)} className='min-w-[44px] w-[44px] aspect-square p-[6px]'>
                             <XMarkIcon className='w-full' />
                         </button>
                     </div>

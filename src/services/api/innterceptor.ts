@@ -12,7 +12,7 @@ export const axiosInstance: AxiosInstance = axios.create({
 // Request interceptor для динамического токена
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
 
         // config.headers точно не null
         if (token) {

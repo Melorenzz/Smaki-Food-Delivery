@@ -5,8 +5,8 @@ const AboutRestaurant = ({restaurant}) => {
     return (
         <div className='w-screen rounded-[24px] bg-white-col py-[40px]'>
             <MainLayout>
-                <div className="flex justify-between items-center">
-                    <div className='flex gap-[20px] items-center'>
+                <div className="flex flex-col gap-[20px] lg:flex-row justify-between items-center">
+                    <div className='flex flex-col lg:flex-row gap-[20px] items-center'>
                         <div className='w-[80px] shadow aspect-square rounded-[16px] bg-white-col p-1'>
                             <img className='rounded-[16px]' src={restaurant?.logo} alt=""/>
                         </div>

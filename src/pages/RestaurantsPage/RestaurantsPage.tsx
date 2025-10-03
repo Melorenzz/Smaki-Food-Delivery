@@ -18,7 +18,7 @@ const RestaurantsPage = () => {
                     </button>
                     <h1 className='text-[32px] font-bold my-[40px]'>Заклади</h1>
                 </div>
-                <div className='grid grid-cols-3 gap-[24px]'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px]'>
                     {restaurants?.restaurants?.map(restaurant => (
                         <RestaurantPreview key={restaurant.id} restaurant={restaurant} />
                     ))}

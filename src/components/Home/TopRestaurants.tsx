@@ -5,44 +5,49 @@ import ProductCardInSwiper from "./ProductCardInSwiper.tsx";
 import {Link} from "react-router";
 
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import {Navigation, Pagination} from "swiper/modules";
 import RestaurantPreview from "../RestaurantPreview.tsx";
 
-const TopRestaurants = ({restaurant}: {restaurant: IRestaurant}) => {
+const TopRestaurants = ({restaurant}: { restaurant: IRestaurant }) => {
 
     const {data} = useGetProductsFromRestaurantQuery(restaurant.id);
-    const products = data?.products;
-
+    const products = data?.pages[0].products;
 
 
     return (
-        <section className='flex flex-col bg-white-col py-[27px]  pl-[27px] rounded-[51px]'>
-            <div className='flex gap-[40px]'>
-                <RestaurantPreview restaurant={restaurant} />
+        <section className='flex flex-col overflow-hidden bg-white-col py-[15px] md:py-[27px] pr-[15px] md:pr-0 pl-[15px] md:pl-[27px] rounded-[51px]'>
+            <div className='flex flex-col md:flex-row gap-[40px]'>
+
+                <div className='w-full md:max-w-[424px]'>
+                    <RestaurantPreview restaurant={restaurant}/>
+
+                </div>
 
                 {/* Swiper для продуктов */}
                 <Swiper
-                    className='flex h-[334px] !pb-[1px]'
+                    className='flex h-[334px] w-full !pb-[1px]'
                     modules={[Navigation, Pagination]}
                     spaceBetween={40} // расстояние между карточками
                     slidesPerView={"auto"} // автоширина под контент
                     navigation
-                    pagination={{ clickable: true }}
+                    pagination={{clickable: true}}
                 >
                     {products?.map((product: IProductCard) => (
-                        <SwiperSlide className='shrink-0' key={product.id} style={{ width: "auto" }}>
-                            <ProductCardInSwiper product={product} />
+                        <SwiperSlide className='shrink-0' key={product.id} style={{width: "auto"}}>
+                            <ProductCardInSwiper product={product}/>
                         </SwiperSlide>
                     ))}
                 </Swiper>
+
+
             </div>
-            <div className='ml-auto mr-[40px] items-center text-red-col flex '>
+            <div className='ml-auto md:flex mr-[40px] items-center text-red-col hidden '>
                 <Link className='font-semibold' to={`/restaurant/${restaurant.id}`}>Показати все</Link>
-                <ChevronRightIcon className='w-[24px]' />
+                <ChevronRightIcon className='w-[24px]'/>
             </div>
         </section>
     );
