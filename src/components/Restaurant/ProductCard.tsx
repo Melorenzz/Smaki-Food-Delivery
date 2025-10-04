@@ -4,7 +4,7 @@ import {PlusCircleIcon} from "@heroicons/react/24/outline";
 
 const ProductCard = ({product}: {product: IProductCard}) => {
     return (
-        <div className='bg-white-col p-[20px] flex items-center gap-[20px] rounded-[36px]'>
+        <div className='bg-white-col p-[20px] flex border-2 transition border-transparent hover:border-red-col items-center gap-[20px] rounded-[36px]'>
             <Img className='max-w-[150px] lg:max-w-[295px] aspect-square object-contain' src={product.image} />
             <div className='h-full w-full flex flex-col'>
                 <div className='flex flex-col gap-[8px]'>

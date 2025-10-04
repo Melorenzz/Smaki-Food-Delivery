@@ -9,7 +9,7 @@ const ShowMoreButton = ({fetchNextPage, isFetchingNextPage}: ShowMoreButtonProps
         <button
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
-            className="max-w-[427px]  w-full p-[12px] bg-white-col border-2 border-border-col rounded-full mx-auto font-semibold text-[15px]"
+            className="max-w-[427px]  w-full p-[12px] bg-white-col border-2 border-border-col rounded-full mx-auto font-semibold text-[15px] hover:text-red-col hover:border-red-col"
         >
             {isFetchingNextPage ? "Завантаження..." : "Показати ще"}
         </button>

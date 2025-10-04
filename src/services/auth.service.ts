@@ -13,7 +13,6 @@
                 console.log(res)
                 return res;
             }catch(err) {
-                console.log('tyt')
                 console.log(err)
                 throw err;
             }

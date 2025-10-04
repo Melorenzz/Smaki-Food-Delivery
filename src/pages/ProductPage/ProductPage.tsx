@@ -10,7 +10,7 @@ const ProductPage = () => {
     const {data: product} = useGetProductById(id)
     const navigate = useNavigate();
     return (
-        <div className='mx-auto max-w-[560px] w-full mt-[20px]'>
+        <div className='mx-auto max-w-[560px] w-full mt-[120px]'>
             <div className='aspect-square w-full rounded-[32px] overflow-hidden bg-white-col relative'>
                 <button onClick={() => navigate(-1)} className='w-[44px] absolute aspect-square p-[10px]  top-[24px] left-[24px]'>
                     <ChevronLeftIcon className='w-full' />

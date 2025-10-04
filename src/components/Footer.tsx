@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer>
             <MainLayout >
-                <div className='bg-black-col my-[60px] rounded-[50px] pt-[40px] px-[60px] pb-[18px]'>
+                <div className='bg-[#181818] my-[60px] rounded-[50px] pt-[40px] px-[60px] pb-[18px]'>
                     <div className='flex flex-wrap justify-between'>
                         <img src="/images/icons/logoWhite.svg" alt="logo"/>
                         <div className='flex mt-[50px] lg:mt-0 flex-wrap gap-[80px] text-dark-gray font-semibold'>

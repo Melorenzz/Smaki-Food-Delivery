@@ -5,7 +5,7 @@ import type {IRestaurant} from "../types/types.ts";
 
 const RestaurantPreview = ({restaurant}: {restaurant: IRestaurant}) => {
     return (
-        <Link to={`/restaurant/${restaurant?.id}`} className='shrink-0 shadow w-full h-[334px] grid grid-rows-3 rounded-[32px] overflow-hidden mb-[40px]'>
+        <Link to={`/restaurant/${restaurant?.id}`} className='shrink-0 shadow  border-2 transition border-transparent hover:border-red-col  w-full h-[334px] grid grid-rows-3 rounded-[32px] overflow-hidden mb-[40px]'>
             <div className='relative h-full row-span-2 rounded-b-[32px] overflow-hidden flex justify-center items-center'>
                 <img className='object-cover w-full h-full' src={restaurant?.banner} alt=""/>
                 <div className='absolute text-red-col flex items-center gap-[4px] bottom-[20px] right-[20px] bg-white-col rounded-full py-[5px] px-[10px]'>

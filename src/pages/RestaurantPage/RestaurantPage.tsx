@@ -29,7 +29,7 @@ const RestaurantPage = () => {
                 <img className='object-cover w-full' src={restaurant?.banner} alt=""/>
             </div>
             <MainLayout>
-                <div className='flex  justify-between my-[40px]'>
+                <div className='flex  justify-between mb-[40px] mt-[calc(88px+40px)]'>
                     <button onClick={() => navigate(-1)} className='w-[44px] bg-gray-col/80 backdrop-blur-[20px] rounded-[14px] aspect-square p-[10px]'>
                         <ChevronLeftIcon className='w-full' />
                     </button>

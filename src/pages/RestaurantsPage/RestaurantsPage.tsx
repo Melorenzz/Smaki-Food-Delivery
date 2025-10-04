@@ -7,7 +7,6 @@ import {useNavigate} from "react-router";
 const RestaurantsPage = () => {
 
     const {data: restaurants} = useGetRestaurants()
-    console.log(restaurants)
     const navigate = useNavigate();
     return (
         <MainLayout>

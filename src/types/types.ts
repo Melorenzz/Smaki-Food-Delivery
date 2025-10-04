@@ -20,3 +20,17 @@ export interface IProductCard {
     restaurantId: string;
     weight: number;
 }
+
+interface address {
+
+}
+export interface IUser {
+    id: string;
+    phone: string;
+    role: 'USER' | 'ADMIN';
+    userProfile: {
+        firstName: string;
+        lastName: string;
+        addresses: address[];
+    }
+}

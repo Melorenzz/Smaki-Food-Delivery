@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import 'tailwindcss';
+@import "tailwindcss";
+@import "tailwindcss-animated";
 
 :root {
     --color-white-col: hsl(0, 0%, 100%);
@@ -12,7 +15,15 @@
     --color-orange-col: #CC6821;
 }
 :root[theme="dark"] {
-
+    --color-white-col: #181818;   /* фон вместо белого */
+    --color-gray-col: #1F1F1F;    /* серый фон */
+    --color-green-col: #06C6A0;   /* чуть ярче зелёный */
+    --color-border-col: #333;     /* бордеры */
+    --color-red-col: #FF4C49;     /* красный поярче */
+    --color-dark-gray: #B0B0B0;   /* текст на тёмном фоне */
+    --color-black-col: #FFFFFF;   /* чёрный → белый для текста */
+    --color-yellow-col: #FFD966;  /* мягкий жёлтый */
+    --color-orange-col: #FF8C42;  /* яркий оранжевый */
 }
 @theme {
     --color-white-col: var(--color-white-col);
@@ -25,6 +36,10 @@
     --color-yellow-col: var(--color-yellow-col);
     --color-orange-col: var(--color-orange-col);
 
+}
+
+*{
+    font-family: "Montserrat Alternates", sans-serif;
 }
 
 body{

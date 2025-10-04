@@ -10,8 +10,6 @@ const WhatOrderIn = () => {
         hasNextPage,
         isFetchingNextPage
     } = useGetProductsFromRestaurantQuery("27d6a336-5011-4408-8c20-015a3d8801cd");
-    console.log('tyy')
-    console.log(data)
     const products = data?.pages.flatMap((page) => page.products) ?? [];
     console.log(products);
     return (

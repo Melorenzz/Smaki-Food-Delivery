@@ -8,10 +8,25 @@ import ProductPage from "./pages/ProductPage/ProductPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage.tsx";
 import Page404 from "./pages/404/404.tsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.tsx";
+import {store} from "./store.ts";
+import {useEffect} from "react";
 
 export default function App() {
 
     const pathname = useLocation().pathname;
+    const setAccessToken  = store(state => state.setAccessToken);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('tokens');
+        if (!stored) return;
+
+        const tokens = JSON.parse(stored);
+        if (tokens.access_token) {
+            setAccessToken(tokens.access_token);
+        }
+    }, []);
+
+
 
     return (
         <>
