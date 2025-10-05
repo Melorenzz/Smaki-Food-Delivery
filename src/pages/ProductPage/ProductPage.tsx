@@ -3,16 +3,27 @@ import {useLocation, useNavigate} from "react-router";
 import Img from "../../components/Img.tsx";
 import {PlusCircleIcon} from "@heroicons/react/24/outline";
 import {ChevronLeftIcon} from "@heroicons/react/16/solid";
+import {store} from "../../store.ts";
+import {useEffect, useState} from "react";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
     const id = pathname.split('/').pop();
     const {data: product} = useGetProductById(id)
     const navigate = useNavigate();
+    const [isInCart, setIsInCart] = useState(false);
+    const setCart = store(state => state.setCart)
+    const cart = store(state => state.cart)
+
+    useEffect(() => {
+        const isExistInCart = cart.some(i => i.id === id)
+        setIsInCart(isExistInCart)
+    }, [cart, setIsInCart])
+    console.log(product)
     return (
         <div className='mx-auto max-w-[560px] w-full mt-[120px]'>
             <div className='aspect-square w-full rounded-[32px] overflow-hidden bg-white-col relative'>
-                <button onClick={() => navigate(-1)} className='w-[44px] absolute aspect-square p-[10px]  top-[24px] left-[24px]'>
+                <button onClick={() => navigate(-1)} className='w-[44px] absolute top-5 left-5 bg-gray-col/80 backdrop-blur-[20px] rounded-[14px] aspect-square p-[10px]'>
                     <ChevronLeftIcon className='w-full' />
                 </button>
                 <Img className='w-full object-contain' src={product?.image} alt=""/>
@@ -26,7 +37,9 @@ const ProductPage = () => {
                 </div>
                 <p className='text-dark-gray text-[14px] line-clamp-2 leading-4 mt-[8px]'>{product?.description}</p>
                 <div className='flex items-center justify-between gap-[11px] mt-[16px]'>
-                    <button className='w-full py-[12px] bg-green-col text-white-col rounded-full'>У кошик</button>
+                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight})} className={`w-full py-[12px]  rounded-full ${isInCart ? 'bg-none border border-col cursor-not-allowed' : 'bg-green-col cursor-pointer text-white-col'}`}>
+                        {isInCart ? 'У кошику' : 'У кошик'}
+                    </button>
                     <PlusCircleIcon className='w-[44px] aspect-square text-green-col' />
                 </div>
             </div>

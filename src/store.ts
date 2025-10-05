@@ -1,12 +1,16 @@
 import {create} from "zustand/react";
 import type {IUser} from "./types/types.ts";
+
 const initialTheme = (localStorage.getItem("theme")) || "light";
 document.documentElement.setAttribute("theme", initialTheme);
 export const store = create((set, get) => ({
     isAuthenticated: false,
     accessToken: null,
-    setAccessToken: (token: string) => set({ accessToken: token, isAuthenticated: !!token }),
-    logout: () => {set({ isAuthenticated: false, setAccessToken: null }); localStorage.removeItem('tokens');},
+    setAccessToken: (token: string) => set({accessToken: token, isAuthenticated: !!token}),
+    logout: () => {
+        set({isAuthenticated: false, setAccessToken: null});
+        localStorage.removeItem('tokens');
+    },
 
     user: null,
     setUser: (data: IUser) => set({user: data}),
@@ -16,12 +20,23 @@ export const store = create((set, get) => ({
         const newTheme = get().theme === "light" ? "dark" : "light";
         localStorage.setItem("theme", newTheme);
         document.documentElement.setAttribute("theme", newTheme);
-        set({ theme: newTheme });
+        set({theme: newTheme});
     },
     setTheme: (t: "light" | "dark") => {
         localStorage.setItem("theme", t);
         document.documentElement.setAttribute("theme", t);
-        set({ theme: t });
+        set({theme: t});
     },
+
+
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+
+    setCart: (newItem) => {
+        set((state) => {
+            const updatedCart = [...state.cart, newItem];
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+            return {cart: updatedCart};
+        })
+    }
 
 }))
