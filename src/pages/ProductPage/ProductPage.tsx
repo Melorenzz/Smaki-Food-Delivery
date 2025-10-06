@@ -37,7 +37,7 @@ const ProductPage = () => {
                 </div>
                 <p className='text-dark-gray text-[14px] line-clamp-2 leading-4 mt-[8px]'>{product?.description}</p>
                 <div className='flex items-center justify-between gap-[11px] mt-[16px]'>
-                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight})} className={`w-full py-[12px]  rounded-full ${isInCart ? 'bg-none border border-col cursor-not-allowed' : 'bg-green-col cursor-pointer text-white-col'}`}>
+                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantity: 1})} className={`w-full py-[12px]  rounded-full ${isInCart ? 'bg-none border border-col cursor-not-allowed' : 'bg-green-col cursor-pointer text-white-col'}`}>
                         {isInCart ? 'У кошику' : 'У кошик'}
                     </button>
                     <PlusCircleIcon className='w-[44px] aspect-square text-green-col' />
