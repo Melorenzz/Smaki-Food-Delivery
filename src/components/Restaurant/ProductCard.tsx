@@ -26,7 +26,7 @@ const ProductCard = ({product}: {product: IProductCard}) => {
                 </div>
                 <div className='mt-auto flex items-end justify-between'>
                     <span className='text-[14px]'> <span className='font-bold text-[22px]'>{product.price}</span> грн</span>
-                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight})} className='w-[44px] text-[#049F83] aspect-square'>
+                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantity: 1})} className='w-[44px] text-[#049F83] aspect-square'>
                         {isInCart ? (
                             <CheckCircleIcon />
                         ) : (

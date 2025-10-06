@@ -4,10 +4,10 @@ import {useRef} from "react";
 const Banner = () => {
     const focusOnSearch = useRef<HTMLInputElement | null>(null);
     return (
-        <div className='flex flex-wrap justify-between gap-5 mt-30'>
-            <img className='max-w-[680px] h-[400px] object-cover w-full rounded-2xl' src="/images/main_image.webp" alt="main image"/>
-            <div className='max-w-[595px]'>
-                <h1 className='text-[54px] font-semibold'>
+        <div className='flex flex-col lg:flex-row justify-between gap-5 mt-30'>
+            <img className='lg:max-w-[680px] h-[400px] object-cover w-full rounded-2xl' src="/images/main_image.webp" alt="main image"/>
+            <div className=' w-full lg:max-w-[595px]'>
+                <h1 className='text-[45px] leading-15 md:leading-relaxed sm:text-[54px] font-semibold'>
                     Сервіс доставки їжі EatsEasy.
                 </h1>
                 <p className='text-[18px] text-dark-gray mt-5'>

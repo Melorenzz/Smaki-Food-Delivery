@@ -27,16 +27,40 @@ export const store = create((set, get) => ({
         document.documentElement.setAttribute("theme", t);
         set({theme: t});
     },
-
-
-    cart: JSON.parse(localStorage.getItem('cart')) || [],
-
+    cart: JSON.parse(localStorage.getItem('cart') || '[]'),
     setCart: (newItem) => {
         set((state) => {
             const updatedCart = [...state.cart, newItem];
             localStorage.setItem('cart', JSON.stringify(updatedCart));
             return {cart: updatedCart};
         })
-    }
+    },
+    addQuantity: (productId: string) => {
+        set((state) => {
+            const updatedCart = state.cart.map((item) =>
+                item.id === productId
+                    ? {...item, quantity: item.quantity + 1, price: ( item.price / item.quantity ) * ( item.quantity + 1 )}
+                    : item
+            );
 
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+            return {cart: updatedCart};
+        });
+    },
+    removeQuantity: (productId: string) => {
+        set((state) => {
+            const updatedCart = state.cart.map(item => {
+                    if(item.id === productId) {
+                            return {...item, quantity: item.quantity - 1, price: item.price - (item.price/item.quantity) }
+                    }else{
+                        return item;
+                    }
+                }
+            ).filter(item => item.quantity > 0);
+
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            return {cart: updatedCart};
+        })
+    }
 }))
