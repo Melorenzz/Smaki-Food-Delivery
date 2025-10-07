@@ -1,14 +1,35 @@
 import {create} from "zustand/react";
-import type {IUser} from "./types/types.ts";
+import type {IProductCard, IUser} from "./types/types.ts";
 
 const initialTheme = (localStorage.getItem("theme")) || "light";
 document.documentElement.setAttribute("theme", initialTheme);
-export const store = create((set, get) => ({
+
+interface StoreState {
+    isAuthenticated: boolean;
+    accessToken: string | null;
+    setAccessToken: (token: string) => void;
+    logout: () => void;
+
+    user: IUser | null;
+    setUser: (data: IUser) => void;
+
+    theme: 'light' | 'dark';
+    toggleTheme: () => void;
+    setTheme: (theme: 'light' | 'dark') => void;
+
+    cart: IProductCard[];
+    setCart: (newItem: IProductCard) => void;
+
+    addQuantity: (productId: string) => void;
+    removeQuantity: (productId: string) => void;
+}
+
+export const store = create<StoreState>((set, get) => ({
     isAuthenticated: false,
     accessToken: null,
     setAccessToken: (token: string) => set({accessToken: token, isAuthenticated: !!token}),
     logout: () => {
-        set({isAuthenticated: false, setAccessToken: null});
+        set({isAuthenticated: false, accessToken: null});
         localStorage.removeItem('tokens');
     },
 
@@ -29,7 +50,7 @@ export const store = create((set, get) => ({
     },
     cart: JSON.parse(localStorage.getItem('cart') || '[]'),
     setCart: (newItem) => {
-        set((state) => {
+        set((state): Partial<StoreState> => {
             const updatedCart = [...state.cart, newItem];
             localStorage.setItem('cart', JSON.stringify(updatedCart));
             return {cart: updatedCart};
@@ -39,7 +60,7 @@ export const store = create((set, get) => ({
         set((state) => {
             const updatedCart = state.cart.map((item) =>
                 item.id === productId
-                    ? {...item, quantity: item.quantity + 1, price: ( item.price / item.quantity ) * ( item.quantity + 1 )}
+                    ? {...item, quantity: (item?.quantity ?? 0) + 1, price: (item.price / (item?.quantity ?? 1)) * ((item?.quantity ?? 0) + 1)}
                     : item
             );
 
@@ -52,12 +73,12 @@ export const store = create((set, get) => ({
         set((state) => {
             const updatedCart = state.cart.map(item => {
                     if(item.id === productId) {
-                            return {...item, quantity: item.quantity - 1, price: item.price - (item.price/item.quantity) }
+                            return {...item, quantity: (item.quantity ?? 0) - 1, price: item.price - (item.price/(item.quantity ?? 0)) }
                     }else{
                         return item;
                     }
                 }
-            ).filter(item => item.quantity > 0);
+            ).filter(item => (item.quantity ?? 0) > 0);
 
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             return {cart: updatedCart};

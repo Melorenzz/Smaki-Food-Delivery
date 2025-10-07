@@ -13,12 +13,13 @@ export interface IProductCard {
     description: string;
     id: string;
     image: string;
-    isFavorite: boolean;
+    isFavorite?: boolean;
     name: string;
     price: number;
-    quantityInBasket: number | null;
-    restaurantId: string;
+    quantityInBasket?: number | null;
+    restaurantId?: string;
     weight: number;
+    quantity?: number;
 }
 
 interface address {

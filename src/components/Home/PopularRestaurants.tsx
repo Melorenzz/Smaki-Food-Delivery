@@ -3,7 +3,7 @@ import type {IRestaurant} from "../../types/types.ts";
 import TopRestaurants from "./TopRestaurants.tsx";
 
 const PopularRestaurants = () => {
-    const {data, isLoading} = useGetTopRestaurantsQuery()
+    const {data} = useGetTopRestaurantsQuery()
     const slicedData = data?.slice(0, 3)
 
     return (
