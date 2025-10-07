@@ -82,4 +82,4 @@ Detailed views for both restaurants and individual food items, including descrip
 ### Authentication
 Secure authentication system supporting Ukrainian phone number format for user verification.
 
-Made by @Melorenzz
+***Made by [@Melorenzz](https://github.com/Melorenzz)***
