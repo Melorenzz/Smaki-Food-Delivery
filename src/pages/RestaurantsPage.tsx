@@ -1,7 +1,7 @@
-import MainLayout from "../../layouts/MainLayout.tsx";
+import MainLayout from "../layouts/MainLayout.tsx";
 import {ChevronLeftIcon} from "@heroicons/react/16/solid";
-import RestaurantPreview from "../../components/RestaurantPreview.tsx";
-import {useGetRestaurants} from "../../hooks/useGetRestaurants.ts";
+import RestaurantPreview from "../components/RestaurantPreview.tsx";
+import {useGetRestaurants} from "../hooks/useGetRestaurants.ts";
 import {useNavigate} from "react-router";
 
 const RestaurantsPage = () => {

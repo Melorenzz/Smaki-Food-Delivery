@@ -1,12 +1,13 @@
 import {useLocation, useNavigate} from "react-router";
-import {useGetProductsFromRestaurantQuery} from "../../hooks/useGetProductsFromRestaurantQuery.ts";
-import {useGetRestaurantQuery} from "../../hooks/useGetRestaurantQuery.ts";
-import MainLayout from "../../layouts/MainLayout.tsx";
+import {useGetProductsFromRestaurantQuery} from "../hooks/useGetProductsFromRestaurantQuery.ts";
+import {useGetRestaurantQuery} from "../hooks/useGetRestaurantQuery.ts";
+import MainLayout from "../layouts/MainLayout.tsx";
 import {ChevronLeftIcon, ShareIcon} from "@heroicons/react/16/solid";
-import AboutRestaurant from "../../components/Restaurant/AboutRestaurant.tsx";
-import ProductCard from "../../components/Restaurant/ProductCard.tsx";
-import ShowMoreButton from "../../components/ShowMoreButton.tsx";
+import AboutRestaurant from "../components/Restaurant/AboutRestaurant.tsx";
+import ProductCard from "../components/Restaurant/ProductCard.tsx";
+import ShowMoreButton from "../components/ShowMoreButton.tsx";
 import {useEffect} from "react";
+import BackButton from "../components/BackButton.tsx";
 
 const RestaurantPage = () => {
 
@@ -21,18 +22,14 @@ const RestaurantPage = () => {
         console.log(products);
     }, [products]);
 
-    // console.log('data', data?.pages[0].products)
-    const navigate = useNavigate();
     return (
         <div>
             <div className='absolute top-0 -z-2 w-screen h-[300px] overflow-hidden flex items-center justify-center'>
                 <img className='object-cover w-full' src={restaurant?.banner} alt=""/>
             </div>
             <MainLayout>
-                <div className='flex  justify-between mb-[40px] mt-[calc(88px+40px)]'>
-                    <button onClick={() => navigate(-1)} className='w-[44px] bg-gray-col/80 backdrop-blur-[20px] rounded-[14px] aspect-square p-[10px]'>
-                        <ChevronLeftIcon className='w-full' />
-                    </button>
+                <div className='flex items-center justify-between mb-[40px] mt-[calc(88px+40px)]'>
+                    <BackButton/>
                     <button className='w-[44px] bg-gray-col/80 backdrop-blur-[20px] rounded-[14px] aspect-square p-[10px]'>
                         <ShareIcon className='w-full' />
                     </button>

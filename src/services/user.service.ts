@@ -10,5 +10,6 @@ export const UserService = {
     getUser: async () => {
         const res = await axiosInstance.get('users/get-user-info')
         return res.data
-    }
+    },
+
 }

@@ -1,14 +1,13 @@
 import {HeartIcon, ShoppingCartIcon, UserIcon} from "@heroicons/react/24/outline";
 import MainLayout from "../layouts/MainLayout.tsx";
-import {Bars3Icon, MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/16/solid";
-import {useEffect, useRef, useState} from "react";
+import {Bars3Icon, MagnifyingGlassIcon} from "@heroicons/react/16/solid";
+import {useState} from "react";
 import Modal from "./Modal.tsx";
 import {useRequestOtp} from "../hooks/useRequestOtp.ts";
 import {useNavigate} from "react-router";
 import Navigation from "./Navigation.tsx";
 import {useVerifyOtp} from "../hooks/useVerifyOtp.ts";
 import {store} from "../store.ts";
-import Img from "./Img.tsx";
 import CartModal from "./CartModal.tsx";
 // import {useOauth} from "../hooks/useOauth.ts";
 
@@ -22,6 +21,7 @@ const Header = () => {
     const { mutate} = useRequestOtp();
     const { mutate: mutateVerify} = useVerifyOtp();
     const isAuthenticated = store(state => state.isAuthenticated);
+    const setIsAuthenticated = store(state => state.setIsAuthenticated);
     const navigation = useNavigate();
     const { theme, toggleTheme } = store();
 
@@ -52,6 +52,8 @@ const Header = () => {
                     if (res.data.success) {
                         console.log("✅ :", res.data);
                         localStorage.setItem("tokens", JSON.stringify(res.data.data.tokens));
+                        navigation('/profile/personal-data');
+                        setIsAuthenticated(true)
                         console.log(res.data.data.tokens)
                     } else {
                         console.error("❌ Ошибка сервера:", res.data.message);
@@ -63,7 +65,7 @@ const Header = () => {
 
     const openProfile = () => {
         if(isAuthenticated){
-            navigation('/profile')
+            navigation('/profile/personal-data');
         }else{
             setIsOpenAuth(true)
         }
@@ -78,12 +80,11 @@ const Header = () => {
                         <button  onClick={() => setIsOpenNavigation(true)} className='rounded-2xl border-2 p-[6px]'>
                             <Bars3Icon className='w-[32px]' />
                         </button>
-                        <button className='text-lg' onClick={toggleTheme}>
+                        <button className='text-lg rounded-2xl border-2 p-[6px]' onClick={toggleTheme}>
                             {theme === "light" ? "🌙" : "☀️"}
                         </button>
 
                     </div>
-
                     <img className='cursor-pointer md:inline hidden' onClick={() => navigate('/')} src="/images/icons/logo.svg" alt="logo"/>
                     <div className='gap-[12px] md:flex hidden'>
                         <button className='h-[44px] w-[44px] flex items-center justify-center rounded-xl bg-gray-col'>
@@ -112,7 +113,10 @@ const Header = () => {
                             <span className='font-bold text-[20px]'>Ласкаво просимо</span>
                             <p className='text-dark-gray text-[16px] mt-[4px]'>Увійти по номеру телефону</p>
                             <label htmlFor="phone" className='text-left mt-[24px] text-[14px] font-semibold '>Мобільний телефон</label>
-                            <input id='phone' className='w-full mt-[5px] px-[14px] py-[13.5px] bg-white-col rounded-full focus:outline-none' placeholder='+38 000 00 00 000' onChange={e => setUserPhoneNumber(e.target.value)} type="number"/>
+                            <div className='w-full flex mt-[5px] px-[14px] py-[13.5px] bg-white-col rounded-full '>
+                                <span>+38</span>
+                                <input id='phone' className='flex-1 focus:outline-none' placeholder=' 000 00 00 000' onChange={e => setUserPhoneNumber(38 + e.target.value)} type="number"/>
+                            </div>
                             <button className='w-full mt-[14px] px-[14px] py-[13.5px] bg-green-col rounded-full font-semibold text-white-col' onClick={handleSendOtp}>Continue</button>
                         </div>
                     </Modal.Body>
@@ -127,11 +131,12 @@ const Header = () => {
                     <Modal.Body>
                         <div className=' text-center'>
                             <span className='font-bold text-[20px]'>Код підтвердження</span>
-                            <p className='text-dark-gray text-[16px] mt-[4px]'>На {userPhoneNumber} був
-                                надісланий код для підтвердження</p>
+                            <p className='text-dark-gray text-[16px] mt-[4px]'>
+                                На {userPhoneNumber} був
+                                надісланий код для підтвердження
+                            </p>
+
                             <input className='w-full mt-[5px] px-[14px] py-[13.5px] bg-white-col rounded-full focus:outline-none' onChange={e => setUserVerifyCode(e.target.value)} type="number"/>
-
-
                             <button className='w-full mt-[14px] px-[14px] py-[13.5px] bg-green-col rounded-full font-semibold text-white-col' onClick={handleVerifyOtp}>Continue</button>
                         </div>
                     </Modal.Body>

@@ -1,16 +1,15 @@
-import {useGetProductById} from "../../hooks/useGetProductById.ts";
-import {useLocation, useNavigate} from "react-router";
-import Img from "../../components/Img.tsx";
+import {useGetProductById} from "../hooks/useGetProductById.ts";
+import {useLocation} from "react-router";
+import Img from "../components/Img.tsx";
 import {PlusCircleIcon} from "@heroicons/react/24/outline";
-import {ChevronLeftIcon} from "@heroicons/react/16/solid";
-import {store} from "../../store.ts";
+import {store} from "../store.ts";
 import {useEffect, useState} from "react";
+import BackButton from "../components/BackButton.tsx";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
     const id = pathname.split('/').pop();
     const {data: product} = useGetProductById(id)
-    const navigate = useNavigate();
     const [isInCart, setIsInCart] = useState(false);
     const setCart = store(state => state.setCart)
     const cart = store(state => state.cart)
@@ -23,9 +22,7 @@ const ProductPage = () => {
     return (
         <div className='mx-auto max-w-[560px] w-full mt-[120px]'>
             <div className='aspect-square w-full rounded-[32px] overflow-hidden bg-white-col relative'>
-                <button onClick={() => navigate(-1)} className='w-[44px] absolute top-5 left-5 bg-gray-col/80 backdrop-blur-[20px] rounded-[14px] aspect-square p-[10px]'>
-                    <ChevronLeftIcon className='w-full' />
-                </button>
+                <BackButton isAbsolutePosition={true} />
                 <Img className='w-full object-contain' src={product?.image} alt=""/>
             </div>
 

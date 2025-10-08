@@ -1,11 +1,13 @@
 import {XMarkIcon} from "@heroicons/react/16/solid";
 import {store} from "../store.ts";
 import Img from "./Img.tsx";
+import {useNavigate} from "react-router";
 
-const CartModal = ({setIsOpenCart}) => {
+const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => void}) => {
     const cart = store(state => state.cart);
     const addQuantity = store(state => state.addQuantity);
     const removeQuantity = store(state => state.removeQuantity);
+    const navigate = useNavigate();
     return (
         <div onClick={() => setIsOpenCart(false)} className='inset-0 animate-fade-left animate-duration-300 bg-black/30 fixed top-0 z-50'>
             <aside onClick={(e) => e.stopPropagation()} className='fixed flex flex-col right-0 top-0 h-screen  bg-gray-col  max-w-[420px] w-full'>
@@ -29,8 +31,8 @@ const CartModal = ({setIsOpenCart}) => {
                                 <div className='flex justify-between mt-[16px] pb-[10px] pt-[26px] border-t border-border-col'>
                                     <div className='flex flex-col'>
                                         <span className='text-[14px]'><span className='font-bold text-[20px]'>{product?.price}</span> грн</span>
-                                        {product?.quantity > 1 && (
-                                            <span className='text-[14px] '><span className='font-semibold '>{product?.price / product?.quantity}</span> грн/шт</span>
+                                        {(product?.quantity ?? 0) > 1 && (
+                                            <span className='text-[14px] '><span className='font-semibold '>{product?.price / (product?.quantity ?? 0)}</span> грн/шт</span>
 
                                         )}
                                     </div>
@@ -51,7 +53,7 @@ const CartModal = ({setIsOpenCart}) => {
                         <span className='text-dark-gray font-semibold'>До сплати:</span>
                         <span className='text-[14px]'><span className='text-[16px] font-semibold'>{cart.reduce((acc, i) => acc+ i.price, 0)}</span> грн</span>
                     </div>
-                    <button className='w-full p-[12px] bg-green-col rounded-full text-[15px] font-semibold text-white-col'>
+                    <button onClick={() => navigate('/checkout')} disabled={cart.length < 1} className='w-full p-[12px] bg-green-col rounded-full text-[15px] font-semibold text-white-col'>
                         Оформити замовлення
                     </button>
                 </div>

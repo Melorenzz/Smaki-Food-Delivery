@@ -1,9 +1,9 @@
-import ProfileNavigation from "../../components/Profile/ProfileNavigation.tsx";
-import MainLayout from "../../layouts/MainLayout.tsx";
-import {useGetUserQuery} from "../../hooks/useGetUserQuery.ts";
-import {store} from "../../store.ts";
+import ProfileNavigation from "../components/Profile/ProfileNavigation.tsx";
+import MainLayout from "../layouts/MainLayout.tsx";
+import {useGetUserQuery} from "../hooks/useGetUserQuery.ts";
+import {store} from "../store.ts";
 import {useEffect} from "react";
-import {useNavigate} from "react-router";
+import {Outlet, useNavigate} from "react-router";
 
 
 const ProfilePage = () => {
@@ -16,7 +16,6 @@ const ProfilePage = () => {
             if(data?.data){
                 setUser(data?.data)
             }else{
-                console.log('t')
                 navigate('/')
             }
         }
@@ -28,9 +27,12 @@ const ProfilePage = () => {
 
     return (
         <MainLayout>
-            <div className='flex gap-[39px] mt-[30px]'>
+            <div className='flex gap-[39px] mt-[calc(88px+33px)]'>
                 <ProfileNavigation />
-                <div className='flex-2'></div>
+                <div className='flex-2'>
+                    <h1 className='text-[22px] font-bold mb-[20px]'>Особисті дані</h1>
+                    <Outlet />
+                </div>
             </div>
         </MainLayout>
     );

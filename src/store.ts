@@ -6,6 +6,7 @@ document.documentElement.setAttribute("theme", initialTheme);
 
 interface StoreState {
     isAuthenticated: boolean;
+    setIsAuthenticated: (isAuthenticated: boolean) => void;
     accessToken: string | null;
     setAccessToken: (token: string) => void;
     logout: () => void;
@@ -26,6 +27,7 @@ interface StoreState {
 
 export const store = create<StoreState>((set, get) => ({
     isAuthenticated: false,
+    setIsAuthenticated: (isAuthenticated) => set({isAuthenticated: isAuthenticated}),
     accessToken: null,
     setAccessToken: (token: string) => set({accessToken: token, isAuthenticated: !!token}),
     logout: () => {
