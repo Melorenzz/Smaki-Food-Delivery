@@ -79,7 +79,4 @@ Full control over cart items including incrementing/decrementing quantities and 
 ### Restaurant & Product Information
 Detailed views for both restaurants and individual food items, including descriptions, prices, and images.
 
-### Authentication
-Secure authentication system supporting Ukrainian phone number format for user verification.
-
 ***Made by [@Melorenzz](https://github.com/Melorenzz)***
