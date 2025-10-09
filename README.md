@@ -18,7 +18,7 @@ You can check the live demo here:
 - **Shopping Cart** - Add products to cart with a single click
 - **Quantity Management** - Adjust product quantities and remove items from cart
 - **Detailed Information** - View comprehensive information about restaurants and dishes
-- **Authentication** - Sign in using Ukrainian phone numbers
+- **Authentication** - Sign in using phone numbers
 - **Responsive Design** - Optimized display across all devices
 
 ## Installation and Setup
