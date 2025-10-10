@@ -18,7 +18,7 @@ You can check the live demo here:
 - **Shopping Cart** - Add products to cart with a single click
 - **Quantity Management** - Adjust product quantities and remove items from cart
 - **Detailed Information** - View comprehensive information about restaurants and dishes
-- **Authentication** - Sign in using Ukrainian phone numbers
+- **Authentication** - Sign in using phone numbers
 - **Responsive Design** - Optimized display across all devices
 
 ## Installation and Setup
@@ -78,8 +78,5 @@ Full control over cart items including incrementing/decrementing quantities and 
 
 ### Restaurant & Product Information
 Detailed views for both restaurants and individual food items, including descriptions, prices, and images.
-
-### Authentication
-Secure authentication system supporting Ukrainian phone number format for user verification.
 
 ***Made by [@Melorenzz](https://github.com/Melorenzz)***
