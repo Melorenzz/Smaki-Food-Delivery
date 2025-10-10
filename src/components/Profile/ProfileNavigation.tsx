@@ -1,10 +1,15 @@
 import {UserCircleIcon} from "@heroicons/react/24/outline";
-import {Link, useLocation} from "react-router";
+import {Link, useLocation, useNavigate} from "react-router";
 import {ChevronRightIcon} from "@heroicons/react/16/solid";
 import {useEffect} from "react";
 import {store} from "../../store.ts";
+import type {ProfileNavigation} from "../../types/types.ts";
 
-const ProfileNavigation = () => {
+interface IProps {
+    nav: ProfileNavigation[]
+}
+
+const ProfileNavigation = ({nav}: IProps) => {
     const user = store(state => state.user)
 
     useEffect(() => {
@@ -13,16 +18,18 @@ const ProfileNavigation = () => {
     }, [user])
 
 
-    const nav = [
-        {page: 'personal-data', icon: '', name: 'Особисті дані', link: '/profile/personal-data'},
-        // {page: '', icon: '', name: 'Мої замовлення', link: ''},
-        {page: 'questions', icon: '', name: 'Часті запитання', link: '/profile/questions'},
-        // {page: '', icon: '', name: 'Відстежити замовлення', link: ''},
-        // {page: '', icon: '', name: 'Збережене', link: ''},
-        {page: '', icon: '', name: 'Вийти', link: ''},
-    ]
+
     const pathname = useLocation().pathname;
     const page = pathname.split('/').pop()
+    const navigate = useNavigate();
+    function logout() {
+        localStorage.removeItem('tokens')
+        const { setUser, setIsAuthenticated } = store.getState();
+        setUser(null);
+        setIsAuthenticated(false);
+        navigate('/')
+    }
+
     return (
         <div className="w-full flex-1">
            <div className='w-full flex items-center gap-[10px] py-[26px] px-[20px] rounded-[26px] bg-white-col'>
@@ -42,6 +49,9 @@ const ProfileNavigation = () => {
                         <ChevronRightIcon className='w-[24px]' />
                     </Link>
                 ))}
+                <button onClick={logout} className='text-[15px] font-semibold hover:text-red-col transition w-full text-left'>
+                    Вийти
+                </button>
             </nav>
         </div>
     );

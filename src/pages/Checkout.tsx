@@ -48,7 +48,7 @@ const Checkout = () => {
     })
     const navigate = useNavigate()
     if(cart.length < 1){
-        return navigate('/')
+        navigate('/')
     }
     return (
         <MainLayout>

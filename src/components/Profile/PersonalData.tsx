@@ -2,6 +2,8 @@ import {store} from "../../store.ts";
 import {PencilIcon} from "@heroicons/react/16/solid";
 import {useEffect, useState} from "react";
 import ChangeInputData from "./ChangeInputData.tsx";
+import {useUpdateUserProfile} from "../../hooks/useUpdateUserProfile.ts";
+import {useQueryClient} from "@tanstack/react-query";
 
 const PersonalData = () => {
     const user = store(state => state.user)
@@ -9,6 +11,23 @@ const PersonalData = () => {
     const [userPhone, setUserPhone] = useState(user?.phone);
     const [isEditingUsername, setIsEditingUsername] = useState(false);
     const [isEditingPhone, setIsEditingPhone] = useState(false);
+
+    const {mutate, isPending, error} = useUpdateUserProfile()
+    const queryClient = useQueryClient()
+    const handleSubmit = () => {
+        mutate({ firstName: userName, lastName: '' }, {
+            onSuccess: async () => {
+                setIsEditingUsername(false);
+                queryClient.invalidateQueries({queryKey: ['getUser']})
+                console.log("Successfully updated");
+            },
+            onError: (error: any) => {
+                console.log("❌ Error updating personal data:", error.response?.data);
+            }
+
+        })
+    }
+
     useEffect(() => {
         if (user) {
             setUserName(user.userProfile?.firstName || "");
@@ -23,7 +42,7 @@ const PersonalData = () => {
                     <div>
                         <h2 className='text-[14px] text-dark-gray'>Ім’я</h2>
                         {isEditingUsername ? (
-                            <ChangeInputData data={userName || ''} setData={setUserName} />
+                            <ChangeInputData isPending={isPending} handleSubmit={handleSubmit} data={userName || ''} setData={setUserName} />
                         ) : (
                             <p className='text-[14px] font-semibold'>{user?.userProfile?.firstName || 'Неизвестно'}</p>
                         )}

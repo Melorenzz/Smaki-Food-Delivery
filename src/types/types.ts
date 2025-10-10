@@ -35,3 +35,16 @@ export interface IUser {
         addresses: address[];
     }
 }
+
+export interface ProfileNavigation {
+    page: string;
+    icon: string;
+    name: string;
+    link: string;
+}
+
+export interface Category {
+    id: string;
+    name: string;
+    imageUrl: string;
+}

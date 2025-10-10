@@ -3,7 +3,9 @@ import type {IProductCard} from "../../types/types.ts";
 import {CheckCircleIcon, PlusCircleIcon} from "@heroicons/react/16/solid";
 import {Link} from "react-router";
 import {store} from "../../store.ts";
-import {useEffect, useState} from "react";
+import { useEffect, useState} from "react";
+import {HeartIcon} from "@heroicons/react/24/outline";
+import {useFavoriteAction} from "../../hooks/useFavoriteAction.ts";
 
 
 const ProductCard = ({product}: {product: IProductCard}) => {
@@ -11,13 +13,17 @@ const ProductCard = ({product}: {product: IProductCard}) => {
     const cart = store(state => state.cart);
     const setCart = store(state => state.setCart);
     const [isInCart, setIsInCart] = useState(false);
+    const { favoriteAction } = useFavoriteAction(product.id, 'product');
     useEffect(() => {
         const isExistInCart = cart.some(i => i.id === product.id)
         setIsInCart(isExistInCart)
     }, [cart])
 
     return (
-        <div className='bg-white-col flex flex-col rounded-[36px] shadow p-[20px]'>
+        <div className='bg-white-col relative flex flex-col rounded-[36px] shadow p-[20px]'>
+            <button onClick={favoriteAction} className='absolute p-[7px] scale-100 hover:scale-110 transition rounded-xl backdrop-blur-xl top-5 bg-white-col/50 shadow right-5 z-1'>
+                <HeartIcon className='w-[24px]' />
+            </button>
             <Link to={`/product/${product.id}`} className='aspect-square w-full '>
                 <Img src={product.image} alt={product?.name} className='w-full h-full object-contain'  />
             </Link>

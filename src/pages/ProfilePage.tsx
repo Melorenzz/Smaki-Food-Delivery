@@ -3,7 +3,7 @@ import MainLayout from "../layouts/MainLayout.tsx";
 import {useGetUserQuery} from "../hooks/useGetUserQuery.ts";
 import {store} from "../store.ts";
 import {useEffect} from "react";
-import {Outlet, useNavigate} from "react-router";
+import {Outlet, useLocation, useNavigate} from "react-router";
 
 
 const ProfilePage = () => {
@@ -11,6 +11,10 @@ const ProfilePage = () => {
     const {data, isLoading} = useGetUserQuery()
     const setUser = store(state => state.setUser)
     const navigate = useNavigate();
+
+    const link = useLocation().pathname;
+    const pathname = link.split('/').pop();
+
     useEffect(() => {
         if(!isLoading){
             if(data?.data){
@@ -24,13 +28,19 @@ const ProfilePage = () => {
     if(isLoading){
         return <p>Loading...</p>
     }
+    const nav = [
+        {page: 'personal-data', icon: '', name: 'Особисті дані', link: '/profile/personal-data'},
+        {page: 'questions', icon: '', name: 'Часті запитання', link: '/profile/questions'},
+        {page: 'favorites', icon: '', name: 'Збережене', link: '/profile/favorites'},
+    ]
+    const currentPage = nav.find(i => i.page === pathname)?.name;
 
     return (
         <MainLayout>
             <div className='flex gap-[39px] mt-[calc(88px+33px)]'>
-                <ProfileNavigation />
+                <ProfileNavigation nav={nav} />
                 <div className='flex-2'>
-                    <h1 className='text-[22px] font-bold mb-[20px]'>Особисті дані</h1>
+                    <h1 className='text-[22px] font-bold mb-[20px]'>{currentPage}</h1>
                     <Outlet />
                 </div>
             </div>

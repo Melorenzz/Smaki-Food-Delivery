@@ -13,6 +13,8 @@ import {useEffect} from "react";
 import Checkout from "./pages/Checkout.tsx";
 import PersonalData from "./components/Profile/PersonalData.tsx";
 import Questions from "./components/Profile/Questions.tsx";
+import Favorites from "./components/Profile/Favorites.tsx";
+import PhoneFooterNav from "./components/PhoneFooterNav.tsx";
 
 export default function App() {
 
@@ -44,11 +46,13 @@ export default function App() {
                     <Route path='/profile' element={<ProfilePage />}>
                         <Route path='personal-data' element={<PersonalData />} />
                         <Route path='questions' element={<Questions />} />
+                        <Route path='favorites' element={<Favorites />} />
                     </Route>
                     <Route path='/checkout' element={<Checkout />} />
                     <Route path='*' element={<Page404 />} />
                 </Routes>
             </main>
+            <PhoneFooterNav />
             { !pathname.startsWith("/product/") && <Footer /> }
         </>
 	)

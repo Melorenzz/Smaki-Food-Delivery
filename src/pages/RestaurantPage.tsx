@@ -4,7 +4,7 @@ import {useGetRestaurantQuery} from "../hooks/useGetRestaurantQuery.ts";
 import MainLayout from "../layouts/MainLayout.tsx";
 import {ChevronLeftIcon, ShareIcon} from "@heroicons/react/16/solid";
 import AboutRestaurant from "../components/Restaurant/AboutRestaurant.tsx";
-import ProductCard from "../components/Restaurant/ProductCard.tsx";
+import ProductCard from "../components/ProductCard.tsx";
 import ShowMoreButton from "../components/ShowMoreButton.tsx";
 import {useEffect} from "react";
 import BackButton from "../components/BackButton.tsx";

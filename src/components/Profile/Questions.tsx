@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 const Questions = () => {
-    const [activeQuestion, setActiveQuestion] = useState<number | null>(1);
+    const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
     const questionsList = [
         {
             title: "Як знайти потрібну страву чи заклад?",

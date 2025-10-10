@@ -1,5 +1,5 @@
 import {MagnifyingGlassIcon} from "@heroicons/react/16/solid";
-import {useEffect, useRef} from "react";
+import { useRef} from "react";
 
 const Search = () => {
 

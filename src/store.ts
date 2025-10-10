@@ -12,7 +12,7 @@ interface StoreState {
     logout: () => void;
 
     user: IUser | null;
-    setUser: (data: IUser) => void;
+    setUser: (data: IUser | null) => void;
 
     theme: 'light' | 'dark';
     toggleTheme: () => void;
@@ -23,6 +23,7 @@ interface StoreState {
 
     addQuantity: (productId: string) => void;
     removeQuantity: (productId: string) => void;
+
 }
 
 export const store = create<StoreState>((set, get) => ({
@@ -36,7 +37,7 @@ export const store = create<StoreState>((set, get) => ({
     },
 
     user: null,
-    setUser: (data: IUser) => set({user: data}),
+    setUser: (data: IUser | null) => set({user: data}),
 
     theme: (localStorage.getItem("theme") as "light" | "dark") || "light",
     toggleTheme: () => {
@@ -85,5 +86,6 @@ export const store = create<StoreState>((set, get) => ({
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             return {cart: updatedCart};
         })
-    }
+    },
+
 }))

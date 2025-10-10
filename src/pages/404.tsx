@@ -5,7 +5,7 @@ const Page404 = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='bg-white-col flex flex-col max-w-[500px] mx-auto mt-[60px] rounded-[30px] px-[50px] py-[20px]'>
+        <div className='bg-white-col mt-[calc(88px+60px)] flex flex-col max-w-[500px] mx-auto  rounded-[30px] px-[50px] py-[20px]'>
             <h1 className='text-center text-[170px] font-bold text-red-col'>404</h1>
             <p className='text-[14px] leading-4 text-dark-gray text-center -mt-6'>Вибачте, але сторінка, яку ви шукаєте, не існує або була видалена.
                 Спробуйте перевірити URL, повернутися на головну сторінку або скористатися меню для навігації.
