@@ -45,7 +45,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                             </div>
                         ))
                     ) : (
-                        <p className='text-center text-dark-gray'>Nothing here yet</p>
+                        <p className='text-center text-dark-gray'>Тут ще нічого немає</p>
                     )}
                 </div>
                 <div className='bg-white-col w-full px-[14px] py-[20px] mt-auto'>

@@ -5,6 +5,9 @@ import {PlusCircleIcon} from "@heroicons/react/24/outline";
 import {store} from "../store.ts";
 import {useEffect, useState} from "react";
 import BackButton from "../components/BackButton.tsx";
+import FavoriteButton from "../components/FavoriteButton.tsx";
+import {useFavoriteAction} from "../hooks/useFavoriteAction.ts";
+import {useGetFavorites} from "../hooks/useGetFavorites.ts";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
@@ -19,8 +22,13 @@ const ProductPage = () => {
         setIsInCart(isExistInCart)
     }, [cart, setIsInCart])
     console.log(product)
+    const { favoriteAction } = useFavoriteAction(product?.id, 'product');
+
+    const {data: favorites} = useGetFavorites()
+
     return (
-        <div className='mx-auto max-w-[560px] w-full mt-[120px]'>
+        <div className='relative mx-auto max-w-[560px] w-full mt-[120px]'>
+
             <div className='aspect-square w-full rounded-[32px] overflow-hidden bg-white-col relative'>
                 <BackButton isAbsolutePosition={true} />
                 <Img className='w-full object-contain' src={product?.image} alt=""/>

@@ -28,7 +28,7 @@ const Favorites = () => {
                             <RestaurantPreview restaurant={restaurant} key={restaurant.id} />
                         ))
                     ) : (
-                        <span className='text-center col-span-2'>Nothing here yet</span>
+                        <span className='text-center col-span-2'>Тут ще нічого немає</span>
                     )
                 ) : (
                     favorites?.products.length > 0 ? (
@@ -39,7 +39,7 @@ const Favorites = () => {
                             </div>
                         ))
                     ) : (
-                        <span className='text-center col-span-2'>Nothing here yet</span>
+                        <span className='text-center col-span-2'>Тут ще нічого немає</span>
                     )
                 )}
             </div>

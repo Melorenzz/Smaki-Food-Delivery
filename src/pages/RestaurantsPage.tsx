@@ -3,6 +3,7 @@ import {ChevronLeftIcon} from "@heroicons/react/16/solid";
 import RestaurantPreview from "../components/RestaurantPreview.tsx";
 import {useGetRestaurants} from "../hooks/useGetRestaurants.ts";
 import {useNavigate} from "react-router";
+import H2 from "../components/Home/H2.tsx";
 
 const RestaurantsPage = () => {
 
@@ -10,7 +11,7 @@ const RestaurantsPage = () => {
     const navigate = useNavigate();
     return (
         <MainLayout>
-            <div>
+            <div className="mt-[88px]">
                 <div className='flex gap-[10px] items-center'>
                     <button onClick={() => navigate(-1)} className='w-[44px] aspect-square bg-white-col rounded-[14px]'>
                         <ChevronLeftIcon className='w-full' />

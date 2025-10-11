@@ -4,6 +4,8 @@ import {PlusCircleIcon, CheckCircleIcon, HeartIcon} from "@heroicons/react/24/ou
 import {store} from "../store.ts";
 import {type FormEvent, useEffect, useState} from "react";
 import {useFavoriteAction} from "../hooks/useFavoriteAction.ts";
+import {useGetFavorites} from "../hooks/useGetFavorites.ts";
+import FavoriteButton from "./FavoriteButton.tsx";
 
 const ProductCard = ({product}: {product: IProductCard}) => {
 
@@ -18,12 +20,14 @@ const ProductCard = ({product}: {product: IProductCard}) => {
 
     const { favoriteAction } = useFavoriteAction(product.id, 'product');
 
+    const {data: favorites} = useGetFavorites()
 
     return (
         <div className='bg-white-col relative p-[20px] h-full flex border-2 transition border-transparent hover:border-red-col items-center gap-[20px] rounded-[36px]'>
-            <button  onClick={favoriteAction} className='absolute p-[7px] scale-100 hover:scale-110 transition rounded-xl backdrop-blur-xl top-5 bg-white-col/50 shadow left-5 z-1'>
-                <HeartIcon className='w-[24px]' />
-            </button>
+
+            <FavoriteButton isInFavorite={favorites?.products?.some(i => i.id === product.id)} favoriteAction={favoriteAction} />
+
+
             <Img className='max-w-[150px] lg:max-w-[295px] aspect-square object-contain' src={product.image} />
             <div className='h-full w-full flex flex-col'>
                 <div className='flex flex-col gap-[8px]'>

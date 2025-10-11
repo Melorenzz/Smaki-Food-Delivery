@@ -29,13 +29,18 @@ const TopRestaurants = ({restaurant}: { restaurant: IRestaurant }) => {
 
                 {/* Swiper для продуктов */}
                 <Swiper
-                    className='flex h-[334px] w-full !pb-[1px]'
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={40} // расстояние между карточками
-                    slidesPerView={"auto"} // автоширина под контент
-                    navigation
-                    pagination={{clickable: true}}
+                    className="flex h-[334px] w-full"
+                    modules={[Navigation]}
+                    spaceBetween={40}
+                    slidesPerView="auto"
+                    navigation={{
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    }}
                 >
+                    <div className="swiper-button-prev !flex !items-center !justify-center !rounded-full !bg-white-col p-[12px]   !text-black-col !shadow border-2 border-border-col hover:!bg-gray-100 active:!scale-95 transition"></div>
+                    <div className="swiper-button-next !flex !items-center !justify-center !rounded-full !bg-white-col p-[12px]   !text-black-col !shadow border-2 border-border-col hover:!bg-gray-100 active:!scale-95 transition"></div>
+
                     {products?.map((product: IProductCard) => (
                         <SwiperSlide className='shrink-0' key={product.id} style={{width: "auto"}}>
                             <ProductCardInSwiper product={product}/>

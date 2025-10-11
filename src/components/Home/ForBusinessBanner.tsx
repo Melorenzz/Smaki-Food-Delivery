@@ -9,7 +9,7 @@ const ForBusinessBanner = () => {
                 <p className='max-w-[410px] text-[18px]'>
                     Замовляйте смачні сніданки чи обіди, їжу для корпоративів в офісі. Ваші улюблені страви ми доставимо якнайшвидше.
                 </p>
-                <button className='text-[15px] font-bold px-[12px] py-[14px] rounded-full bg-red-col'>Спробувати</button>
+                <button className='text-[15px] font-bold px-[12px] py-[14px] rounded-full bg-red-col hover:bg-black-col transition'>Спробувати</button>
             </div>
         </section>
     );
