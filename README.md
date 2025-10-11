@@ -4,7 +4,7 @@ A modern food delivery web application with intuitive interface and comprehensiv
 
 ## Demo
 
-You can check the live demo here: 
+You can check the live demo here: https://melorenzz.github.io/Smaki-Food-Delivery/
 
 ## Technology Stack
 
