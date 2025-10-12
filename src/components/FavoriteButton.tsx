@@ -1,7 +1,13 @@
 import {HeartIcon} from "@heroicons/react/24/outline";
 import {store} from "../store.ts";
+import type {FormEvent} from "react";
 
-const FavoriteButton = ({favoriteAction, isInFavorite}) => {
+interface IFavoriteButtonProps {
+    favoriteAction: (e?: FormEvent) => void;
+    isInFavorite: boolean;
+}
+
+const FavoriteButton = ({favoriteAction, isInFavorite}: IFavoriteButtonProps) => {
 
     const isAuthenticated = store(state => state.isAuthenticated);
 

@@ -15,6 +15,8 @@ import PersonalData from "./components/Profile/PersonalData.tsx";
 import Questions from "./components/Profile/Questions.tsx";
 import Favorites from "./components/Profile/Favorites.tsx";
 import PhoneFooterNav from "./components/PhoneFooterNav.tsx";
+import AuthModal from "./components/AuthModal.tsx";
+import CartModal from "./components/CartModal.tsx";
 
 export default function App() {
 
@@ -31,10 +33,24 @@ export default function App() {
         }
     }, []);
 
+    const setIsOpenAuthModal = store(state => state.setIsOpenAuthModal);
+    const isOpenAuthModal = store(state => state.isOpenAuthModal);
+
+    const isOpenCart = store(state => state.isOpenCart);
+    const setIsOpenCart = store(state => state.setIsOpenCart);
 
 
     return (
         <>
+            {isOpenAuthModal && (
+                <AuthModal setIsOpenModal={setIsOpenAuthModal} />
+            )}
+            {isOpenCart && (
+                <CartModal setIsOpenCart={setIsOpenCart} />
+            )}
+
+
+
             <Header />
             <ScrollToTop />
             <main>

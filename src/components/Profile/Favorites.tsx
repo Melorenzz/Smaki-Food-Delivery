@@ -21,7 +21,7 @@ const Favorites = () => {
                 <button onClick={() => setSelectedCategory('products')} className={`flex-1 pb-[10px] border-b-1 text-dark-gray font-semibold text-[16px] ${selectedCategory === 'products' ? 'text-red-col border-b-red-col border-b-2' : 'text-dark-gray'}`}>Їжа</button>
             </div>
 
-            <div className='grid grid-cols-2 gap-[20px] mt-[20px]'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-[20px]'>
                 {selectedCategory === 'restaurants' ? (
                     favorites?.restaurants.length > 0 ? (
                         favorites?.restaurants.map((restaurant: IRestaurant) => (

@@ -3,10 +3,10 @@ import {Link, useLocation, useNavigate} from "react-router";
 import {ChevronRightIcon} from "@heroicons/react/16/solid";
 import {useEffect} from "react";
 import {store} from "../../store.ts";
-import type {ProfileNavigation} from "../../types/types.ts";
+import type {ProfileNavigationType} from "../../types/types.ts";
 
 interface IProps {
-    nav: ProfileNavigation[]
+    nav: ProfileNavigationType[]
 }
 
 const ProfileNavigation = ({nav}: IProps) => {

@@ -1,7 +1,8 @@
 import MainLayout from "../../layouts/MainLayout.tsx";
 import {ClockIcon, StarIcon, TruckIcon} from "@heroicons/react/16/solid";
+import type {IRestaurant} from "../../types/types.ts";
 
-const AboutRestaurant = ({restaurant}) => {
+const AboutRestaurant = ({restaurant}: {restaurant: IRestaurant}) => {
     return (
         <div className='w-screen rounded-[24px] bg-white-col py-[40px]'>
             <MainLayout>

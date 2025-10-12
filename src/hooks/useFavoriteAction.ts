@@ -16,9 +16,9 @@ export const useFavoriteAction = (id: string, type: 'product' | 'restaurant' ) =
             console.log(err)
         }
     })
-    const favoriteAction = (e: FormEvent) => {
-        e.stopPropagation();
-        e.preventDefault();
+    const favoriteAction = (e?: FormEvent) => {
+        e?.stopPropagation();
+        e?.preventDefault();
         console.log(id);
         if(type === 'product') {
             mutate({productId: id, type: 'product'})

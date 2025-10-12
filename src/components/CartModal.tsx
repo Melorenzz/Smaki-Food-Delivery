@@ -9,8 +9,8 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
     const removeQuantity = store(state => state.removeQuantity);
     const navigate = useNavigate();
     return (
-        <div onClick={() => setIsOpenCart(false)} className='inset-0 animate-fade-left animate-duration-300 bg-black/30 fixed top-0 z-50'>
-            <aside onClick={(e) => e.stopPropagation()} className='fixed flex flex-col right-0 top-0 h-screen  bg-gray-col  max-w-[420px] w-full'>
+        <div onClick={() => setIsOpenCart(false)} className='inset-0 bg-black/30 fixed top-0 z-50'>
+            <aside onClick={(e) => e.stopPropagation()} className='fixed animate-fade-left animate-duration-300 flex flex-col right-0 top-0 h-screen  bg-gray-col  max-w-[420px] w-full'>
                 <div className='flex items-center justify-between px-[14px] py-[20px]'>
                     <span className='text-[18px] font-semibold'>Кошик</span>
                     <button onClick={() => setIsOpenCart(false)} className='w-[44px] p-[6px] bg-white-col rounded-[15px]'>

@@ -4,7 +4,14 @@ const ForBusinessBanner = () => {
     return (
         <section className='mt-[50px]'>
             <H2>EatsEasy для бізнесу!</H2>
-            <div className='flex text-center mt-[20px] text-white justify-center items-center flex-col gap-[15px] h-[500px] w-full rounded-[25px] bg-[url("./images/partner_image.bc467e10.jpg")] bg-center bg-cover'>
+            <div
+                className="flex text-center mt-[20px] text-white justify-center items-center flex-col gap-[15px] h-[500px] w-full rounded-[25px]"
+                style={{
+                    backgroundImage: `url(${import.meta.env.BASE_URL}images/partner_image.bc467e10.jpg)`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                }}
+            >
                 <h3 className='font-bold text-[24px]'>EatsEasy для бізнесу!</h3>
                 <p className='max-w-[410px] text-[18px]'>
                     Замовляйте смачні сніданки чи обіди, їжу для корпоративів в офісі. Ваші улюблені страви ми доставимо якнайшвидше.

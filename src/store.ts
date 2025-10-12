@@ -1,30 +1,10 @@
 import {create} from "zustand/react";
-import type {IProductCard, IUser} from "./types/types.ts";
+import type {IUser, StoreState} from "./types/types.ts";
 
 const initialTheme = (localStorage.getItem("theme")) || "light";
 document.documentElement.setAttribute("theme", initialTheme);
 
-interface StoreState {
-    isAuthenticated: boolean;
-    setIsAuthenticated: (isAuthenticated: boolean) => void;
-    accessToken: string | null;
-    setAccessToken: (token: string) => void;
-    logout: () => void;
 
-    user: IUser | null;
-    setUser: (data: IUser | null) => void;
-
-    theme: 'light' | 'dark';
-    toggleTheme: () => void;
-    setTheme: (theme: 'light' | 'dark') => void;
-
-    cart: IProductCard[];
-    setCart: (newItem: IProductCard) => void;
-
-    addQuantity: (productId: string) => void;
-    removeQuantity: (productId: string) => void;
-
-}
 
 export const store = create<StoreState>((set, get) => ({
     isAuthenticated: false,
@@ -88,4 +68,13 @@ export const store = create<StoreState>((set, get) => ({
         })
     },
 
+    isOpenAuthModal: false,
+    setIsOpenAuthModal: (isOpen: boolean) => {
+        set({isOpenAuthModal: isOpen})
+    },
+
+    isOpenCart: false,
+    setIsOpenCart: (isOpen: boolean) => {
+        set({isOpenCart: isOpen})
+    },
 }))

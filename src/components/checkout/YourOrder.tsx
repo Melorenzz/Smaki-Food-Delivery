@@ -7,12 +7,12 @@ const YourOrder = () => {
     const { handleSubmit } = useFormContext();
 
 
-    const onSubmit = (data) => {
-        console.log("Form data:", data);
+    const onSubmit = () => {
+        console.log("Form data:");
     };
 
-    const onError = (errors) => {
-        console.log("Form errors:", errors);
+    const onError = () => {
+        console.log("Form errors:");
     };
 
     const cart = store(state => state.cart);

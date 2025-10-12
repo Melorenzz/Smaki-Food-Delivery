@@ -21,11 +21,15 @@ const PersonalData = () => {
                 queryClient.invalidateQueries({queryKey: ['getUser']})
                 console.log("Successfully updated");
             },
-            onError: (error: any) => {
-                console.log("❌ Error updating personal data:", error.response?.data);
+            onError: () => {
+                console.log("❌ Error updating personal data:", error);
             }
 
         })
+    }
+
+    const updateUserPhone = () => {
+        console.log('update phone currently doesnt work')
     }
 
     useEffect(() => {
@@ -56,7 +60,7 @@ const PersonalData = () => {
                     <div>
                         <h2 className='text-[14px] text-dark-gray'>Телефон</h2>
                         {isEditingPhone ? (
-                                <ChangeInputData data={userPhone || ''} setData={setUserPhone} />
+                                <ChangeInputData isPending={false} handleSubmit={updateUserPhone} data={userPhone || ''} setData={setUserPhone} />
 
                         ) : (
                             <p className='text-[14px] font-semibold'>+{user?.phone}</p>

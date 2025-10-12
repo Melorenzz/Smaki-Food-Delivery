@@ -1,8 +1,8 @@
 import type {IProductCard} from "../types/types.ts";
 import Img from "./Img.tsx";
-import {PlusCircleIcon, CheckCircleIcon, HeartIcon} from "@heroicons/react/24/outline";
+import {PlusCircleIcon, CheckCircleIcon} from "@heroicons/react/24/outline";
 import {store} from "../store.ts";
-import {type FormEvent, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import {useFavoriteAction} from "../hooks/useFavoriteAction.ts";
 import {useGetFavorites} from "../hooks/useGetFavorites.ts";
 import FavoriteButton from "./FavoriteButton.tsx";
@@ -25,7 +25,7 @@ const ProductCard = ({product}: {product: IProductCard}) => {
     return (
         <div className='bg-white-col relative p-[20px] h-full flex border-2 transition border-transparent hover:border-red-col items-center gap-[20px] rounded-[36px]'>
 
-            <FavoriteButton isInFavorite={favorites?.products?.some(i => i.id === product.id)} favoriteAction={favoriteAction} />
+            <FavoriteButton isInFavorite={favorites?.products?.some((i: IProductCard) => i.id === product.id)} favoriteAction={favoriteAction} />
 
 
             <Img className='max-w-[150px] lg:max-w-[295px] aspect-square object-contain' src={product.image} />

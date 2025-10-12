@@ -25,7 +25,7 @@ const Questions = () => {
             <div className='space-y-5'>
                 {questionsList.map((question, index) => (
                     <div onClick={() => setActiveQuestion(activeQuestion === index ? null : index)} key={index} className='rounded-[16px] p-[14px] w-full bg-white-col'>
-                        <h2>{question.title}</h2>
+                        <h2 className='font-medium'>{question.title}</h2>
                         {activeQuestion === index && (
                             <p className='mt-5 text-dark-gray'>{question.subtitle}</p>
 

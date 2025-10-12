@@ -37,7 +37,7 @@ const ProfilePage = () => {
 
     return (
         <MainLayout>
-            <div className='flex gap-[39px] mt-[calc(88px+33px)]'>
+            <div className='flex flex-col md:flex-row gap-[39px] mt-[calc(88px+33px)]'>
                 <ProfileNavigation nav={nav} />
                 <div className='flex-2'>
                     <h1 className='text-[22px] font-bold mb-[20px]'>{currentPage}</h1>

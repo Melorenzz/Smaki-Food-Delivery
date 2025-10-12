@@ -1,11 +1,10 @@
 import {StarIcon} from "@heroicons/react/16/solid";
-import {HeartIcon, TruckIcon} from "@heroicons/react/24/outline";
+import { TruckIcon} from "@heroicons/react/24/outline";
 import {Link} from "react-router";
 import type {IRestaurant} from "../types/types.ts";
 import {useFavoriteAction} from "../hooks/useFavoriteAction.ts";
 import {useGetFavorites} from "../hooks/useGetFavorites.ts";
 import FavoriteButton from "./FavoriteButton.tsx";
-import {store} from "../store.ts";
 
 const RestaurantPreview = ({restaurant}: {restaurant: IRestaurant}) => {
 
@@ -16,7 +15,7 @@ const RestaurantPreview = ({restaurant}: {restaurant: IRestaurant}) => {
         <Link
             to={`/restaurant/${restaurant?.id}`}
             className='relative shrink-0 shadow  border-2 transition border-transparent hover:border-red-col  w-full h-[334px] grid grid-rows-3 rounded-[32px] overflow-hidden mb-[40px]'>
-            <FavoriteButton isInFavorite={favorites?.restaurants?.some(i => i.id === restaurant.id)} favoriteAction={favoriteAction} />
+            <FavoriteButton isInFavorite={favorites?.restaurants?.some((i: IRestaurant) => i.id === restaurant.id)} favoriteAction={favoriteAction} />
 
             <div className='relative h-full row-span-2 rounded-b-[32px] overflow-hidden flex justify-center items-center'>
                 <img className='object-cover w-full h-full' src={restaurant?.banner} alt=""/>

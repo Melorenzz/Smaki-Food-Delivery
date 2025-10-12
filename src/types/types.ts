@@ -7,6 +7,7 @@ export interface IRestaurant {
     name: string;
     rating: number;
     workingHours: string;
+    logo?: string;
 }
 
 export interface IProductCard {
@@ -36,7 +37,7 @@ export interface IUser {
     }
 }
 
-export interface ProfileNavigation {
+export interface ProfileNavigationType {
     page: string;
     icon: string;
     name: string;
@@ -47,4 +48,32 @@ export interface Category {
     id: string;
     name: string;
     imageUrl: string;
+}
+
+export interface StoreState {
+    isAuthenticated: boolean;
+    setIsAuthenticated: (isAuthenticated: boolean) => void;
+    accessToken: string | null;
+    setAccessToken: (token: string) => void;
+    logout: () => void;
+
+    user: IUser | null;
+    setUser: (data: IUser | null) => void;
+
+    theme: 'light' | 'dark';
+    toggleTheme: () => void;
+    setTheme: (theme: 'light' | 'dark') => void;
+
+    cart: IProductCard[];
+    setCart: (newItem: IProductCard) => void;
+
+    addQuantity: (productId: string) => void;
+    removeQuantity: (productId: string) => void;
+
+    isOpenAuthModal: boolean;
+    setIsOpenAuthModal: (isOpenAuthModal: boolean) => void;
+
+    isOpenCart: boolean;
+    setIsOpenCart: (isOpenCart: boolean) => void;
+
 }

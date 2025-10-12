@@ -1,8 +1,8 @@
-import {useLocation, useNavigate} from "react-router";
+import {useLocation} from "react-router";
 import {useGetProductsFromRestaurantQuery} from "../hooks/useGetProductsFromRestaurantQuery.ts";
 import {useGetRestaurantQuery} from "../hooks/useGetRestaurantQuery.ts";
 import MainLayout from "../layouts/MainLayout.tsx";
-import {ChevronLeftIcon, ShareIcon} from "@heroicons/react/16/solid";
+import { ShareIcon} from "@heroicons/react/16/solid";
 import AboutRestaurant from "../components/Restaurant/AboutRestaurant.tsx";
 import ProductCard from "../components/ProductCard.tsx";
 import ShowMoreButton from "../components/ShowMoreButton.tsx";

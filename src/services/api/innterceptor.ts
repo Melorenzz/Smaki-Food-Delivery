@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
         const token = tokensStr ? JSON.parse(tokensStr)?.access_token : null;
 
         if (token) {
-            (config.headers as any).Authorization = `Bearer ${token}`;
+            (config.headers ).Authorization = `Bearer ${token}`;
         }
 
         return config;
@@ -47,7 +47,11 @@ axiosInstance.interceptors.response.use(
                 });
 
                 const newAccessToken = response.data.access_token;
-
+                if (!tokensStr) {
+                    localStorage.removeItem("tokens");
+                    store.getState().setIsAuthenticated(false);
+                    return Promise.reject(error);
+                }
                 localStorage.setItem(
                     "tokens",
                     JSON.stringify({

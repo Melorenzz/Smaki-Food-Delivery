@@ -3,7 +3,8 @@ import {ChevronLeftIcon} from "@heroicons/react/16/solid";
 import RestaurantPreview from "../components/RestaurantPreview.tsx";
 import {useGetRestaurants} from "../hooks/useGetRestaurants.ts";
 import {useNavigate} from "react-router";
-import H2 from "../components/Home/H2.tsx";
+import type {IRestaurant} from "../types/types.ts";
+
 
 const RestaurantsPage = () => {
 
@@ -19,7 +20,7 @@ const RestaurantsPage = () => {
                     <h1 className='text-[32px] font-bold my-[40px]'>Заклади</h1>
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px]'>
-                    {restaurants?.restaurants?.map(restaurant => (
+                    {restaurants?.restaurants?.map((restaurant: IRestaurant) => (
                         <RestaurantPreview key={restaurant.id} restaurant={restaurant} />
                     ))}
                 </div>
