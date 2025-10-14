@@ -6,17 +6,52 @@ import { useEffect, useState} from "react";
 import {useFavoriteAction} from "../hooks/useFavoriteAction.ts";
 import {useGetFavorites} from "../hooks/useGetFavorites.ts";
 import FavoriteButton from "./FavoriteButton.tsx";
+import {useBasketAction} from "../hooks/useBasketAction.ts";
+import {useGetBasket} from "../hooks/useGetBasket.ts";
 
 const ProductCard = ({product}: {product: IProductCard}) => {
 
     const cart = store(state => state.cart);
     const setCart = store(state => state.setCart);
     const [isInCart, setIsInCart] = useState(false);
+    const isAuthenticated = store(state => state.isAuthenticated);
+    const {data: cartBd} = useGetBasket(isAuthenticated)
     useEffect(() => {
-        const isExistInCart = cart.some(i => i.id === product.id)
-        setIsInCart(isExistInCart)
-    }, [cart])
+        if(isAuthenticated){
+            const isExistInCart = cartBd?.some(i => i.id === product.id)
+            setIsInCart(isExistInCart)
+        }else{
+            const isExistInCart = cart.some(i => i.id === product.id)
+            setIsInCart(isExistInCart)
+        }
 
+    }, [cart, isAuthenticated, cartBd])
+
+
+    const {mutate} = useBasketAction();
+
+    const addToCart = (data) => {
+        if (isAuthenticated) {
+            mutate(
+                {
+                    productId: data.id,
+                    quantity: data.quantityInBasket,
+                    restaurantId: data.restaurantId,
+                    sessionId: localStorage.getItem("sessionId") || undefined,
+                },
+                {
+                    onSuccess: () => {
+                        console.log("success");
+                    },
+                    onError: (error) => {
+                        console.log("error", error);
+                    },
+                }
+            );
+        } else {
+            setCart(data);
+        }
+    };
 
     const { favoriteAction } = useFavoriteAction(product.id, 'product');
 
@@ -37,7 +72,7 @@ const ProductCard = ({product}: {product: IProductCard}) => {
                 </div>
                 <div className='mt-auto flex items-end justify-between'>
                     <span className='text-[14px]'> <span className='font-bold text-[22px]'>{product.price}</span> грн</span>
-                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantity: 1})} className='w-[44px] text-[#049F83] aspect-square'>
+                    <button disabled={isInCart} onClick={() => addToCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantityInBasket: 1, restaurantId: product?.restaurantId})} className='w-[44px] text-[#049F83] aspect-square'>
                         {isInCart ? (
                                 <CheckCircleIcon />
                         ) : (

@@ -9,11 +9,14 @@ export const useFavoriteAction = (id: string, type: 'product' | 'restaurant' ) =
         mutationFn: (data: {restaurantId?: string, productId?: string, type: 'restaurant' | 'product'}) => FavoritesService.addFavorite(data),
         onSuccess: () => {
             console.log("Favorite action successfully");
+
+
             queryClient.invalidateQueries({ queryKey: ['getFavorites'] });
         },
         onError: (err) => {
             console.log("Error favorite action");
             console.log(err)
+
         }
     })
     const favoriteAction = (e?: FormEvent) => {

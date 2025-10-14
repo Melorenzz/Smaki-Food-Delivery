@@ -1,4 +1,4 @@
-import {UserCircleIcon} from "@heroicons/react/24/outline";
+import {ArrowRightEndOnRectangleIcon, ArrowRightOnRectangleIcon, UserCircleIcon} from "@heroicons/react/24/outline";
 import {Link, useLocation, useNavigate} from "react-router";
 import {ChevronRightIcon} from "@heroicons/react/16/solid";
 import {useEffect} from "react";
@@ -39,17 +39,20 @@ const ProfileNavigation = ({nav}: IProps) => {
                     <span className='text-[12px] text-dark-gray'>+{user?.phone}</span>
                 </div>
            </div>
-            <nav className='rounded-[26px] p-[20px] mt-[10px] bg-white-col space-y-[21px]'>
+            <nav className='rounded-[26px] p-[20px] mt-[10px] bg-white-col space-y-[10px]'>
                 {nav.map((item, i) => (
-                    <Link className={`flex items-center justify-between hover:text-red-col ${page === item.page ? 'text-red-col' : 'text-black-col'} transition `} key={i} to={item.link}>
-                        <div className='flex items-center gap-[26px]'>
-                            {item.icon}
+                    <Link className={`flex items-center  justify-between hover:text-red-col ${page === item.page ? 'text-red-col' : 'text-black-col'} transition `} key={i} to={item.link}>
+                        <div className='flex items-center gap-[16px]'>
+                             <span className='w-[44px] aspect-square p-[10px]'>
+                                 {item.icon}
+                             </span>
                             <span className='text-[15px] font-semibold'>{item?.name}</span>
                         </div>
                         <ChevronRightIcon className='w-[24px]' />
                     </Link>
                 ))}
-                <button onClick={logout} className='text-[15px] font-semibold hover:text-red-col transition w-full text-left'>
+                <button onClick={logout} className='text-[15px] flex items-center gap-[16px] font-semibold hover:text-red-col transition w-full text-left'>
+                    <ArrowRightEndOnRectangleIcon className='w-[44px] p-[10px]' />
                     Вийти
                 </button>
             </nav>

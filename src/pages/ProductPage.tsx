@@ -5,6 +5,8 @@ import {PlusCircleIcon} from "@heroicons/react/24/outline";
 import {store} from "../store.ts";
 import {useEffect, useState} from "react";
 import BackButton from "../components/BackButton.tsx";
+import {useBasketAction} from "../hooks/useBasketAction.ts";
+import {useGetBasket} from "../hooks/useGetBasket.ts";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
@@ -13,12 +15,47 @@ const ProductPage = () => {
     const [isInCart, setIsInCart] = useState(false);
     const setCart = store(state => state.setCart)
     const cart = store(state => state.cart)
-
+    const isAuthenticated = store(state => state.isAuthenticated)
+    const {data: cartBd} = useGetBasket(isAuthenticated)
     useEffect(() => {
-        const isExistInCart = cart.some(i => i.id === id)
-        setIsInCart(isExistInCart)
-    }, [cart, setIsInCart])
+        if(isAuthenticated){
+            const isExistInCart = cartBd?.some(i => i.id === id)
+            setIsInCart(isExistInCart)
+        }else{
+            const isExistInCart = cart.some(i => i.id === id)
+            setIsInCart(isExistInCart)
+        }
+
+    }, [cart, setIsInCart, isAuthenticated, cartBd])
     console.log(product)
+
+
+    const {mutate} = useBasketAction()
+
+    const addToCart = (data) => {
+        if (isAuthenticated) {
+            mutate(
+                {
+                    productId: data.id,
+                    quantity: data.quantityInBasket,
+                    restaurantId: data.restaurantId,
+                    sessionId: localStorage.getItem("sessionId") || undefined,
+                },
+                {
+                    onSuccess: () => {
+                        console.log("success");
+                    },
+                    onError: (error) => {
+                        console.log("error", error);
+                    },
+                }
+            );
+        } else {
+            setCart(data);
+        }
+    };
+
+
 
     return (
         <div className='relative mx-auto max-w-[560px] w-full mt-[120px]'>
@@ -36,7 +73,7 @@ const ProductPage = () => {
                 </div>
                 <p className='text-dark-gray text-[14px] line-clamp-2 leading-4 mt-[8px]'>{product?.description}</p>
                 <div className='flex items-center justify-between gap-[11px] mt-[16px]'>
-                    <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantity: 1})} className={`w-full py-[12px]  rounded-full ${isInCart ? 'bg-none border border-col cursor-not-allowed' : 'bg-green-col cursor-pointer text-white-col'}`}>
+                    <button disabled={isInCart} onClick={() => addToCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantityInBasket: 1, restaurantId: product?.restaurantId})} className={`w-full py-[12px]  rounded-full ${isInCart ? 'bg-none border border-col cursor-not-allowed' : 'bg-green-col cursor-pointer text-white-col'}`}>
                         {isInCart ? 'У кошику' : 'У кошик'}
                     </button>
                     <PlusCircleIcon className='w-[44px] aspect-square text-green-col' />

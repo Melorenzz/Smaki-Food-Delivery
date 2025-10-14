@@ -9,6 +9,7 @@ import DeliveryDetails from "../components/checkout/DeliveryDetails.tsx";
 import BackButton from "../components/BackButton.tsx";
 import {useNavigate} from "react-router";
 import {store} from "../store.ts";
+import {useEffect} from "react";
 
 const Checkout = () => {
     const cart = store(state => state.cart);
@@ -47,9 +48,10 @@ const Checkout = () => {
         mode: "onSubmit"
     })
     const navigate = useNavigate()
-    if(cart.length < 1){
-        navigate('/')
-    }
+        if(cart.length < 1){
+            navigate('/')
+        }
+
     return (
         <MainLayout>
             <div className='flex items-center mt-[calc(88px+22.5px)] sm:mt-[calc(88px+42.5px)] mb-[20px] sm:mb-[40px] gap-2'>

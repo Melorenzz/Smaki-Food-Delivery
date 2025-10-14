@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
           <BrowserRouter basename="/Smaki-Food-Delivery/">
               <App />
-          </BrowserRouter>
+              </BrowserRouter>
       </QueryClientProvider>
   </StrictMode>,
 )

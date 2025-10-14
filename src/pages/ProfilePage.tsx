@@ -4,6 +4,7 @@ import {useGetUserQuery} from "../hooks/useGetUserQuery.ts";
 import {store} from "../store.ts";
 import {useEffect} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router";
+import {HeartIcon, QuestionMarkCircleIcon, UserIcon} from "@heroicons/react/24/outline";
 
 
 const ProfilePage = () => {
@@ -29,9 +30,9 @@ const ProfilePage = () => {
         return <p>Loading...</p>
     }
     const nav = [
-        {page: 'personal-data', icon: '', name: 'Особисті дані', link: '/profile/personal-data'},
-        {page: 'questions', icon: '', name: 'Часті запитання', link: '/profile/questions'},
-        {page: 'favorites', icon: '', name: 'Збережене', link: '/profile/favorites'},
+        {page: 'personal-data', icon: <UserIcon />, name: 'Особисті дані', link: '/profile/personal-data'},
+        {page: 'questions', icon: <QuestionMarkCircleIcon />, name: 'Часті запитання', link: '/profile/questions'},
+        {page: 'favorites', icon: <HeartIcon />, name: 'Збережене', link: '/profile/favorites'},
     ]
     const currentPage = nav.find(i => i.page === pathname)?.name;
 

@@ -20,7 +20,6 @@ export interface IProductCard {
     quantityInBasket?: number | null;
     restaurantId?: string;
     weight: number;
-    quantity?: number;
 }
 
 interface address {
@@ -77,3 +76,4 @@ export interface StoreState {
     setIsOpenCart: (isOpenCart: boolean) => void;
 
 }
+

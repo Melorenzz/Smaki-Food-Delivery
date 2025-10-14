@@ -1,6 +1,5 @@
 import { useNavigate} from "react-router";
 import {HomeIcon, MagnifyingGlassIcon, ShoppingCartIcon, UserIcon} from "@heroicons/react/16/solid";
-import {useState} from "react";
 import {store} from "../store.ts";
 
 const PhoneFooterNav = () => {

@@ -2,12 +2,53 @@ import {XMarkIcon} from "@heroicons/react/16/solid";
 import {store} from "../store.ts";
 import Img from "./Img.tsx";
 import {useNavigate} from "react-router";
+import {useEffect, useState} from "react";
+import {useGetBasket} from "../hooks/useGetBasket.ts";
+import type {IProductCard} from "../types/types.ts";
+import {useBasketAction} from "../hooks/useBasketAction.ts";
 
 const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => void}) => {
-    const cart = store(state => state.cart);
+    // const cart = store(state => state.cart);
+    const [cart, setCart] = useState<IProductCard[]>([]);
     const addQuantity = store(state => state.addQuantity);
     const removeQuantity = store(state => state.removeQuantity);
     const navigate = useNavigate();
+    const isAuthenticated = store(state => state.isAuthenticated);
+    const {data: cartBd} = useGetBasket(isAuthenticated);
+    const cartStore = store(state => state.cart);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            if (cartBd) setCart(cartBd);
+        } else {
+            setCart(cartStore);
+        }
+    }, [cartBd, cartStore, isAuthenticated]);
+
+    const { mutate } = useBasketAction();
+
+    const changeQuantityBd = (data) => {
+
+        mutate(
+            {
+                productId: data.id,
+                quantity: data.quantity,
+                restaurantId: data.restaurantId,
+                sessionId: localStorage.getItem("sessionId") || undefined,
+            },
+            {
+                onSuccess: () => {
+                    console.log("success");
+                },
+                onError: (error) => {
+                    console.log("error", error);
+                },
+            }
+        );
+
+    };
+
+
     return (
         <div onClick={() => setIsOpenCart(false)} className='inset-0 bg-black/30 fixed top-0 z-50'>
             <aside onClick={(e) => e.stopPropagation()} className='fixed animate-fade-left animate-duration-300 flex flex-col right-0 top-0 h-screen  bg-gray-col  max-w-[420px] w-full'>
@@ -30,16 +71,46 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                                 </div>
                                 <div className='flex justify-between mt-[16px] pb-[10px] pt-[26px] border-t border-border-col'>
                                     <div className='flex flex-col'>
-                                        <span className='text-[14px]'><span className='font-bold text-[20px]'>{product?.price}</span> грн</span>
-                                        {(product?.quantity ?? 0) > 1 && (
-                                            <span className='text-[14px] '><span className='font-semibold '>{product?.price / (product?.quantity ?? 0)}</span> грн/шт</span>
+                                        <span className='text-[14px]'><span className='font-bold text-[20px]'>{product?.price * (product?.quantityInBasket ?? 1)}</span> грн</span>
+                                        {(product?.quantityInBasket ?? 0) > 1 && (
+                                            <span className='text-[14px] '><span className='font-semibold '>{product?.price}</span> грн/шт</span>
 
                                         )}
+
+
                                     </div>
                                     <div className='px-[10px] py-[6px] border-2 border-col  rounded-full flex items-center gap-[20px] justify-center'>
-                                        <button onClick={() => removeQuantity(product.id)}>-</button>
-                                        <span className='font-semibold text-[16px]'>{product?.quantity}</span>
-                                        <button onClick={() => addQuantity(product.id)}>+</button>
+                                        <button
+                                            onClick={() => {
+                                                if (isAuthenticated) {
+                                                    changeQuantityBd({
+                                                        id: product.id,
+                                                        quantity: (product.quantityInBasket ?? 1) - 1,
+                                                        restaurantId: product.restaurantId,
+                                                    });
+                                                } else {
+                                                    removeQuantity(product.id);
+                                                }
+                                            }}
+                                        >
+                                            -
+                                        </button>
+                                        <span className='font-semibold text-[16px]'>{product?.quantityInBasket }</span>
+                                        <button
+                                            onClick={() => {
+                                                if (isAuthenticated) {
+                                                    changeQuantityBd({
+                                                        id: product.id,
+                                                        quantity: (product.quantityInBasket ?? 1) + 1,
+                                                        restaurantId: product.restaurantId,
+                                                    });
+                                                } else {
+                                                    addQuantity(product.id);
+                                                }
+                                            }}
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +122,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                 <div className='bg-white-col w-full px-[14px] py-[20px] mt-auto'>
                     <div className='flex items-center justify-between mb-[20px]'>
                         <span className='text-dark-gray font-semibold'>До сплати:</span>
-                        <span className='text-[14px]'><span className='text-[16px] font-semibold'>{cart.reduce((acc, i) => acc+ i.price, 0)}</span> грн</span>
+                        <span className='text-[14px]'><span className='text-[16px] font-semibold'>{cart.reduce((acc, i) => acc + i.price * (i.quantityInBasket ?? 1), 0)}</span> грн</span>
                     </div>
                     <button onClick={() => navigate('/checkout')} disabled={cart.length < 1} className='w-full p-[12px] bg-green-col rounded-full text-[15px] font-semibold text-white-col'>
                         Оформити замовлення

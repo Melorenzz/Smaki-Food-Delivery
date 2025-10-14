@@ -7,6 +7,8 @@ import { useEffect, useState} from "react";
 import {useFavoriteAction} from "../../hooks/useFavoriteAction.ts";
 import FavoriteButton from "../FavoriteButton.tsx";
 import {useGetFavorites} from "../../hooks/useGetFavorites.ts";
+import {useBasketAction} from "../../hooks/useBasketAction.ts";
+import {useGetBasket} from "../../hooks/useGetBasket.ts";
 
 
 const ProductCard = ({product}: {product: IProductCard}) => {
@@ -15,11 +17,43 @@ const ProductCard = ({product}: {product: IProductCard}) => {
     const setCart = store(state => state.setCart);
     const [isInCart, setIsInCart] = useState(false);
     const { favoriteAction } = useFavoriteAction(product.id, 'product');
+    const isAuthenticated = store(state => state.isAuthenticated);
+    const {data: cartBd} = useGetBasket(isAuthenticated)
     useEffect(() => {
-        const isExistInCart = cart.some(i => i.id === product.id)
-        setIsInCart(isExistInCart)
-    }, [cart])
+        if(isAuthenticated){
+            const isExistInCart = cartBd?.some(i => i.id === product.id)
+            setIsInCart(isExistInCart)
+        }else{
+            const isExistInCart = cart.some(i => i.id === product.id)
+            setIsInCart(isExistInCart)
+        }
 
+    }, [cart, isAuthenticated, cartBd])
+
+    const {mutate} = useBasketAction()
+
+    const addToCart = (data) => {
+        if (isAuthenticated) {
+            mutate(
+                {
+                    productId: data.id,
+                    quantity: data.quantityInBasket,
+                    restaurantId: data.restaurantId,
+                    sessionId: localStorage.getItem("sessionId") || undefined,
+                },
+                {
+                    onSuccess: () => {
+                        console.log("success");
+                    },
+                    onError: (error) => {
+                        console.log("error", error);
+                    },
+                }
+            );
+        } else {
+            setCart(data);
+        }
+    };
     const {data: favorites} = useGetFavorites()
     return (
         <div className='bg-white-col relative flex flex-col rounded-[36px] shadow p-[20px]'>
@@ -38,7 +72,7 @@ const ProductCard = ({product}: {product: IProductCard}) => {
             </div>
             <div className='mt-auto flex justify-between items-end'>
                 <span className='font-semibold text-[22px]'>{product.price} <span className='text-[14px] font-medium'>грн</span></span>
-                <button disabled={isInCart} onClick={() => setCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantity: 1})} className='aspect-square w-[44px]'>
+                <button disabled={isInCart} onClick={() => addToCart({image: product?.image, name: product?.name, price: product?.price, description: product?.description, id: product?.id, weight: product?.weight, quantityInBasket: 1, restaurantId: product?.restaurantId})} className='aspect-square w-[44px]'>
                     {isInCart ? (
                         <CheckCircleIcon className='text-green-col' />
                         ) : (

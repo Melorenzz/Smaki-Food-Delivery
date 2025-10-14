@@ -43,7 +43,7 @@ export const store = create<StoreState>((set, get) => ({
         set((state) => {
             const updatedCart = state.cart.map((item) =>
                 item.id === productId
-                    ? {...item, quantity: (item?.quantity ?? 0) + 1, price: (item.price / (item?.quantity ?? 1)) * ((item?.quantity ?? 0) + 1)}
+                    ? {...item, quantityInBasket: (item?.quantityInBasket ?? 0) + 1}
                     : item
             );
 
@@ -56,12 +56,12 @@ export const store = create<StoreState>((set, get) => ({
         set((state) => {
             const updatedCart = state.cart.map(item => {
                     if(item.id === productId) {
-                            return {...item, quantity: (item.quantity ?? 0) - 1, price: item.price - (item.price/(item.quantity ?? 0)) }
+                            return {...item, quantityInBasket: (item.quantityInBasket ?? 0) - 1 }
                     }else{
                         return item;
                     }
                 }
-            ).filter(item => (item.quantity ?? 0) > 0);
+            ).filter(item => (item.quantityInBasket ?? 0) > 0);
 
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             return {cart: updatedCart};
