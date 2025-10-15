@@ -1,11 +1,12 @@
 import {XMarkIcon} from "@heroicons/react/16/solid";
 import {store} from "../store.ts";
 import Img from "./Img.tsx";
-import {useNavigate} from "react-router";
-import {useEffect, useState} from "react";
+import {Link, useLocation, useNavigate} from "react-router";
+import {useEffect, useRef, useState} from "react";
 import {useGetBasket} from "../hooks/useGetBasket.ts";
 import type {IProductCard} from "../types/types.ts";
 import {useBasketAction} from "../hooks/useBasketAction.ts";
+import toast from "react-hot-toast";
 
 const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => void}) => {
     // const cart = store(state => state.cart);
@@ -17,6 +18,15 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
     const {data: cartBd} = useGetBasket(isAuthenticated);
     const cartStore = store(state => state.cart);
 
+    const location = useLocation();
+    const prevPathRef = useRef(location.pathname);
+
+    useEffect(() => {
+        if (prevPathRef.current !== location.pathname) {
+            setIsOpenCart(false); // закрываем при переходе
+        }
+        prevPathRef.current = location.pathname;
+    }, [location.pathname]);
     useEffect(() => {
         if (isAuthenticated) {
             if (cartBd) setCart(cartBd);
@@ -38,6 +48,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
             },
             {
                 onSuccess: () => {
+                    toast.success('Кошик оновлено')
                     console.log("success");
                 },
                 onError: (error) => {
@@ -58,14 +69,15 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                         <XMarkIcon />
                     </button>
                 </div>
-                <div className='px-[14px] flex flex-col gap-5 overflow-y-scroll'>
-                    {cart && cart.length > 0 ? (
+                <div className="px-[14px] flex flex-col gap-5 overflow-y-scroll hide-scrollbar">
+
+                {cart && cart.length > 0 ? (
                         cart.map(product => (
                             <div key={product?.id} className=' p-[16px] bg-white-col rounded-[26px]'>
                                 <div className='flex gap-[16px]'>
                                     <Img className='w-[90px] aspect-square' src={product.image} alt={product.name} />
-                                    <div>
-                                        <h2 className='font-bold text-[16px] leading-5'>{product.name}</h2>
+                                    <div className='flex flex-col'>
+                                        <Link to={`/product/${product.id}`} className='font-bold border-b border-transparent hover:border-black-col  text-[16px] leading-5'>{product.name}</Link>
                                         <span className='text-dark-gray text-[14px] mt-[6px]'>{product?.weight} г</span>
                                     </div>
                                 </div>
@@ -79,7 +91,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
 
 
                                     </div>
-                                    <div className='px-[10px] py-[6px] border-2 border-col  rounded-full flex items-center gap-[20px] justify-center'>
+                                    <div className='w-[97px] h-[40px] border-2 border-col  rounded-full flex items-center gap-[20px] justify-center'>
                                         <button
                                             onClick={() => {
                                                 if (isAuthenticated) {
@@ -89,6 +101,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                                                         restaurantId: product.restaurantId,
                                                     });
                                                 } else {
+                                                    toast.success('Кошик оновлено')
                                                     removeQuantity(product.id);
                                                 }
                                             }}
@@ -105,6 +118,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
                                                         restaurantId: product.restaurantId,
                                                     });
                                                 } else {
+                                                    toast.success('Кошик оновлено')
                                                     addQuantity(product.id);
                                                 }
                                             }}

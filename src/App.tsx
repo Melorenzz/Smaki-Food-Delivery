@@ -17,6 +17,7 @@ import Favorites from "./components/Profile/Favorites.tsx";
 import PhoneFooterNav from "./components/PhoneFooterNav.tsx";
 import AuthModal from "./components/AuthModal.tsx";
 import CartModal from "./components/CartModal.tsx";
+import toast from "react-hot-toast";
 
 export default function App() {
 
@@ -69,7 +70,7 @@ export default function App() {
                 </Routes>
             </main>
             <PhoneFooterNav />
-            { !pathname.startsWith("/product/") && <Footer /> }
+            <Footer />
         </>
 	)
 }

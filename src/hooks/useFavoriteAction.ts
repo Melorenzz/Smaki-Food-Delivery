@@ -1,6 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {FavoritesService} from "../services/favorites.service.ts";
 import type {FormEvent} from "react";
+import toast from "react-hot-toast";
 
 export const useFavoriteAction = (id: string, type: 'product' | 'restaurant' ) => {
     const queryClient = useQueryClient();
@@ -9,6 +10,7 @@ export const useFavoriteAction = (id: string, type: 'product' | 'restaurant' ) =
         mutationFn: (data: {restaurantId?: string, productId?: string, type: 'restaurant' | 'product'}) => FavoritesService.addFavorite(data),
         onSuccess: () => {
             console.log("Favorite action successfully");
+            toast.success('Улюблене оновлено!');
 
 
             queryClient.invalidateQueries({ queryKey: ['getFavorites'] });
@@ -16,7 +18,7 @@ export const useFavoriteAction = (id: string, type: 'product' | 'restaurant' ) =
         onError: (err) => {
             console.log("Error favorite action");
             console.log(err)
-
+            toast.success('Помилка.');
         }
     })
     const favoriteAction = (e?: FormEvent) => {

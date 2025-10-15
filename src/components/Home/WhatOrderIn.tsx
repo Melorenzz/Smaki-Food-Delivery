@@ -1,11 +1,12 @@
 import { useGetProductsFromRestaurantQuery } from "../../hooks/useGetProductsFromRestaurantQuery.ts";
-import ProductCard from "./ProductCard.tsx";
+import ProductCard from "../ProductCard.tsx";
 import type { IProductCard } from "../../types/types.ts";
 import ShowMoreButton from "../ShowMoreButton.tsx";
 
 const WhatOrderIn = () => {
     const {
         data,
+        isLoading,
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage
@@ -17,12 +18,19 @@ const WhatOrderIn = () => {
             <h2 className="text-[32px] font-extrabold">Що замовити у Eats Easy</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[26px] mb-[21px]">
-                {products.map((product: IProductCard) => (
-                    <ProductCard product={product} key={product.id} />
-                ))}
+                {isLoading ? (
+                        Array.from({length: 6}).map((_, i) => (
+                            <div key={i} className='h-[623px] bg-gray-200 animate-pulse flex-1 rounded-[24px]'></div>
+
+                        ))
+                ) : (
+                    products.map((product: IProductCard) => (
+                        <ProductCard product={product} key={product.id} />
+                    ))
+                )}
             </div>
 
-            {hasNextPage && (
+            {hasNextPage && !isLoading && (
                 <ShowMoreButton fetchNextPage={fetchNextPage} isFetchingNextPage={isFetchingNextPage} />
             )}
         </section>

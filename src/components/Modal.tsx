@@ -6,7 +6,7 @@ import type {MainModalProps, ModalHeaderProps, ModalProps} from "../types/modal-
 const Modal = ({children, className, setIsOpenModal}: MainModalProps) => {
     return createPortal(
         <div onClick={() => setIsOpenModal(false)} className={`fixed inset-0 z-100 bg-black/25 flex items-center justify-center`}>
-            <div onClick={(e) => e.stopPropagation()} className={`bg-gray-col p-[20px] rounded-[32px] ${className}`}>
+            <div onClick={(e) => e.stopPropagation()} className={`bg-gray-col animate-fade-up animate-duration-400 p-[20px] rounded-0 md:rounded-[32px] md:w-[440px] w-full md:h-auto h-full ${className}`}>
                 {children}
             </div>
         </div>,

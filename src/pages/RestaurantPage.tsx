@@ -4,7 +4,7 @@ import {useGetRestaurantQuery} from "../hooks/useGetRestaurantQuery.ts";
 import MainLayout from "../layouts/MainLayout.tsx";
 import { ShareIcon} from "@heroicons/react/16/solid";
 import AboutRestaurant from "../components/Restaurant/AboutRestaurant.tsx";
-import ProductCard from "../components/ProductCard.tsx";
+import ProductCardWidth from "../components/ProductCardWidth.tsx";
 import ShowMoreButton from "../components/ShowMoreButton.tsx";
 import {useEffect} from "react";
 import BackButton from "../components/BackButton.tsx";
@@ -39,7 +39,7 @@ const RestaurantPage = () => {
             <MainLayout>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-[20px] mt-[40px]'>
                     {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCardWidth key={product.id} product={product} />
                     ))}
 
                 </div>

@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import ChangeInputData from "./ChangeInputData.tsx";
 import {useUpdateUserProfile} from "../../hooks/useUpdateUserProfile.ts";
 import {useQueryClient} from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const PersonalData = () => {
     const user = store(state => state.user)
@@ -15,14 +16,17 @@ const PersonalData = () => {
     const {mutate, isPending, error} = useUpdateUserProfile()
     const queryClient = useQueryClient()
     const handleSubmit = () => {
+        const toastId = toast.loading('Оновлення профілю...');
         mutate({ firstName: userName, lastName: '' }, {
             onSuccess: async () => {
                 setIsEditingUsername(false);
                 queryClient.invalidateQueries({queryKey: ['getUser']})
                 console.log("Successfully updated");
+                toast.success('Профіль оновлено!', { id: toastId });
             },
             onError: () => {
                 console.log("❌ Error updating personal data:", error);
+                toast.error('Не вдалося оновити профіль.', { id: toastId });
             }
 
         })

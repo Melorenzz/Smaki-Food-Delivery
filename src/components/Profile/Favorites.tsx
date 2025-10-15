@@ -2,7 +2,7 @@ import {useGetFavorites} from "../../hooks/useGetFavorites.ts";
 import {useEffect, useState} from "react";
 import RestaurantPreview from "../RestaurantPreview.tsx";
 import type {IProductCard, IRestaurant} from "../../types/types.ts";
-import ProductCard from "../ProductCard.tsx";
+import ProductCardWidth from "../ProductCardWidth.tsx";
 
 const Favorites = () => {
 
@@ -34,7 +34,7 @@ const Favorites = () => {
                     favorites?.products.length > 0 ? (
                         favorites?.products.map((product: IProductCard) => (
                             <div key={product.id} className='col-span-2'>
-                                <ProductCard product={product}  />
+                                <ProductCardWidth product={product}  />
 
                             </div>
                         ))

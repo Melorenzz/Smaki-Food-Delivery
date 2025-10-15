@@ -1,9 +1,10 @@
-import {ArrowRightEndOnRectangleIcon, ArrowRightOnRectangleIcon, UserCircleIcon} from "@heroicons/react/24/outline";
+import {ArrowRightEndOnRectangleIcon, UserCircleIcon} from "@heroicons/react/24/outline";
 import {Link, useLocation, useNavigate} from "react-router";
 import {ChevronRightIcon} from "@heroicons/react/16/solid";
 import {useEffect} from "react";
 import {store} from "../../store.ts";
 import type {ProfileNavigationType} from "../../types/types.ts";
+import toast from "react-hot-toast";
 
 interface IProps {
     nav: ProfileNavigationType[]
@@ -23,6 +24,7 @@ const ProfileNavigation = ({nav}: IProps) => {
     const page = pathname.split('/').pop()
     const navigate = useNavigate();
     function logout() {
+        toast.success('Успiх')
         localStorage.removeItem('tokens')
         const { setUser, setIsAuthenticated } = store.getState();
         setUser(null);

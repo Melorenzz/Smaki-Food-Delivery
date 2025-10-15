@@ -4,6 +4,8 @@ import {useNavigate} from "react-router";
 import {useRequestOtp} from "../hooks/useRequestOtp.ts";
 import {useVerifyOtp} from "../hooks/useVerifyOtp.ts";
 import {store} from "../store.ts";
+import OTPInput from "react-otp-input";
+import toast from "react-hot-toast";
 
 const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => void}) => {
     const [isOpenAuth, setIsOpenAuth] = useState(true);
@@ -14,7 +16,7 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
     const { mutate} = useRequestOtp();
     const { mutate: mutateVerify} = useVerifyOtp();
     const setIsAuthenticated = store(state => state.setIsAuthenticated);
-
+    const [code, setCode] = useState("");
     const handleSendOtp = () => {
         setIsOpenVerify(true)
         setIsOpenAuth(false)
@@ -22,6 +24,7 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
             onSuccess: (res: any) => {
                 if (res.data.success) {
                     console.log("✅ OTP отправлен:", res.data);
+                    setCode(res.data.data);
                 } else {
                     console.error("❌ Ошибка сервера:", res.data.message);
                 }
@@ -38,17 +41,20 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
                 onSuccess: (res) => {
                     setIsOpenModal(false);
                     if (res.data.success) {
-                        console.log("✅ :", res.data);
+                        toast.success('Успiх')
+                        setCode(res.data.data)
                         localStorage.setItem("tokens", JSON.stringify(res.data.data.tokens));
                         navigation('/profile/personal-data');
                         setIsAuthenticated(true)
                         console.log(res.data.data.tokens)
                     } else {
                         console.error("❌ Ошибка сервера:", res.data.message);
+                        toast.error('Не вірний код')
                     }
                 },
                 onError: (err) => {
                     console.error("❌ Ошибка запроса:", err);
+                    toast.error('Не вірний код')
                 },
             }
         );
@@ -87,9 +93,26 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
                                 На {userPhoneNumber} був
                                 надісланий код для підтвердження
                             </p>
+                            <OTPInput
+                                value={userVerifyCode}
+                                onChange={setUserVerifyCode}
+                                numInputs={4}
+                                shouldAutoFocus
+                                isInputNum
+                                renderInput={(props) => (
+                                    <input
+                                        {...props}
+                                        style={{ width: '44px', height: '44px', background: 'white', border: 'none' }}
+                                        className="border rounded-md text-center text-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                )}
+                                containerStyle="flex w-full mt-3 justify-center gap-3"
+                            />
 
-                            <input className='w-full mt-[5px] px-[14px] py-[13.5px] bg-white-col rounded-full focus:outline-none' onChange={e => setUserVerifyCode(e.target.value)} type="number"/>
-                            <button className='w-full mt-[14px] px-[14px] py-[13.5px] bg-green-col rounded-full font-semibold text-white-col' onClick={handleVerifyOtp}>Continue</button>
+                            <p>{code}</p>
+
+                            {/*<input className='w-full mt-[5px] px-[14px] py-[13.5px] bg-white-col rounded-full focus:outline-none' onChange={e => setUserVerifyCode(e.target.value)} type="number"/>*/}
+                            <button className='w-full mt-[14px] px-[14px] py-[13.5px] bg-green-col rounded-full font-semibold text-white-col' onClick={handleVerifyOtp}>Підтвердити</button>
                         </div>
                     </Modal.Body>
                 </>

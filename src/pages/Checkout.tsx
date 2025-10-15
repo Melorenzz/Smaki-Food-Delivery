@@ -48,10 +48,12 @@ const Checkout = () => {
         mode: "onSubmit"
     })
     const navigate = useNavigate()
+
+    useEffect(() => {
         if(cart.length < 1){
             navigate('/')
         }
-
+    }, []);
     return (
         <MainLayout>
             <div className='flex items-center mt-[calc(88px+22.5px)] sm:mt-[calc(88px+42.5px)] mb-[20px] sm:mb-[40px] gap-2'>
