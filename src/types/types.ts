@@ -1,3 +1,5 @@
+import type {JSX} from "react";
+
 export interface IRestaurant {
     banner: string;
     cookingTime: number;
@@ -38,7 +40,7 @@ export interface IUser {
 
 export interface ProfileNavigationType {
     page: string;
-    icon: string;
+    icon: JSX.Element;
     name: string;
     link: string;
 }

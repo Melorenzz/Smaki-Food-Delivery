@@ -4,6 +4,7 @@ import {store} from "../../store.ts";
 import ProductCard from "./ProductCard.tsx";
 import {useEffect, useState} from "react";
 import {useGetBasket} from "../../hooks/useGetBasket.ts";
+import type {IProductCard} from "../../types/types.ts";
 
 const YourOrder = () => {
     const { handleSubmit } = useFormContext();
@@ -11,12 +12,13 @@ const YourOrder = () => {
 
     const onSubmit = () => {
         console.log("Form data:");
+
     };
 
     const onError = () => {
         console.log("Form errors:");
     };
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState<IProductCard[]>([])
 
     const isAuthenticated = store(state => state.isAuthenticated);
 
@@ -35,8 +37,8 @@ const YourOrder = () => {
         <div className='flex-1'>
             <h2 className='text-[18px] font-semibold'>Ваше замовлення</h2>
 
-            <div className='rounded-[28px] space-y-[10px] max-h-[447px] overflow-y-scroll my-[12px]'>
-                {cart?.map(product => (
+            <div className='rounded-[28px] space-y-[10px] max-h-[447px] overflow-y-scroll hide-scrollbar my-[12px]'>
+                {cart?.map((product: IProductCard) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

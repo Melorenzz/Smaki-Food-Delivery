@@ -35,7 +35,6 @@ const Favorites = () => {
                         favorites?.products.map((product: IProductCard) => (
                             <div key={product.id} className='col-span-2'>
                                 <ProductCardWidth product={product}  />
-
                             </div>
                         ))
                     ) : (

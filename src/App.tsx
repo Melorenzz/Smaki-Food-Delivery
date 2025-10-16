@@ -1,7 +1,7 @@
 import Header from "./components/Header.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import Footer from "./components/Footer.tsx";
-import {Route, Routes, useLocation} from "react-router";
+import {Route, Routes} from "react-router";
 import RestaurantPage from "./pages/RestaurantPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.ts";
 import ProductPage from "./pages/ProductPage.tsx";
@@ -17,11 +17,13 @@ import Favorites from "./components/Profile/Favorites.tsx";
 import PhoneFooterNav from "./components/PhoneFooterNav.tsx";
 import AuthModal from "./components/AuthModal.tsx";
 import CartModal from "./components/CartModal.tsx";
-import toast from "react-hot-toast";
+import OrderDone from "./pages/OrderDone.tsx";
+import AboutUs from "./pages/AboutUs.tsx";
+import DeliveryAndPayment from "./pages/DeliveryAndPayment.tsx";
 
 export default function App() {
 
-    const pathname = useLocation().pathname;
+    // const pathname = useLocation().pathname;
     const setAccessToken  = store(state => state.setAccessToken);
 
     useEffect(() => {
@@ -66,6 +68,9 @@ export default function App() {
                         <Route path='favorites' element={<Favorites />} />
                     </Route>
                     <Route path='/checkout' element={<Checkout />} />
+                    <Route path='/order/done' element={<OrderDone />} />
+                    <Route path='/about' element={<AboutUs />} />
+                    <Route path='/delivery-and-payment' element={<DeliveryAndPayment />} />
                     <Route path='*' element={<Page404 />} />
                 </Routes>
             </main>

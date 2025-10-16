@@ -44,6 +44,7 @@
 
 body{
     color: var(--color-black-col);
+    font-weight: 500;
 }
 button, a {
     cursor: pointer;

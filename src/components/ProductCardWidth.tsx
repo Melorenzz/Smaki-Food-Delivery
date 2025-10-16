@@ -20,7 +20,7 @@ const ProductCardWidth = ({product}: {product: IProductCard}) => {
     const {data: cartBd} = useGetBasket(isAuthenticated)
     useEffect(() => {
         if(isAuthenticated){
-            const isExistInCart = cartBd?.some(i => i.id === product.id)
+            const isExistInCart = cartBd?.some((i: IProductCard) => i.id === product.id)
             setIsInCart(isExistInCart)
         }else{
             const isExistInCart = cart.some(i => i.id === product.id)
@@ -29,10 +29,13 @@ const ProductCardWidth = ({product}: {product: IProductCard}) => {
 
     }, [cart, isAuthenticated, cartBd])
 
+    useEffect(() => {
+        console.log(product)
+    }, [product]);
 
     const {mutate} = useBasketAction();
 
-    const addToCart = (data) => {
+    const addToCart = (data: IProductCard) => {
         if (isAuthenticated) {
             mutate(
                 {

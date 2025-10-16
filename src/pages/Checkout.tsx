@@ -24,7 +24,7 @@ const Checkout = () => {
         entrance: z.string().min(1, "Can't be empty"),
         floor: z.string().min(1, "Can't be empty"),
         comment: z.string().optional(),
-        email: z.email('Invalid email address'),
+        // email: z.email('Invalid email address'),
         paymentMethod: z.string(''),
         changeFromAmount: z.string().optional(),
     })

@@ -29,7 +29,7 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
                     console.error("❌ Ошибка сервера:", res.data.message);
                 }
             },
-            onError: (err: any) => {
+            onError: (err: unknown) => {
                 console.error("❌ Ошибка запроса:", err);
             }
         });
@@ -98,7 +98,7 @@ const AuthModal = ({setIsOpenModal}: {setIsOpenModal: (isOpenModal: boolean) => 
                                 onChange={setUserVerifyCode}
                                 numInputs={4}
                                 shouldAutoFocus
-                                isInputNum
+                                inputType="number"
                                 renderInput={(props) => (
                                     <input
                                         {...props}

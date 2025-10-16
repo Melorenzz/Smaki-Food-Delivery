@@ -10,6 +10,7 @@ import {useGetBasket} from "../hooks/useGetBasket.ts";
 import MainLayout from "../layouts/MainLayout.tsx";
 import ProductsFromSameRestaurant from "../components/product/ProductsFromSameRestaurant.tsx";
 import toast from "react-hot-toast";
+import type {IProductCard} from "../types/types.ts";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
@@ -27,7 +28,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         if(isAuthenticated){
-            const isExistInCart = cartBd?.some(i => i.id === id)
+            const isExistInCart = cartBd?.some((i: IProductCard) => i.id === id)
             setIsInCart(isExistInCart)
         }else{
             const isExistInCart = cart.some(i => i.id === id)
@@ -40,7 +41,7 @@ const ProductPage = () => {
 
     const {mutate} = useBasketAction()
 
-    const addToCart = (data) => {
+    const addToCart = (data: IProductCard) => {
         if (isAuthenticated) {
             mutate(
                 {

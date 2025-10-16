@@ -16,8 +16,8 @@ const Navigation = ({setIsOpenNavigation}: INavigation) => {
     const navigationLinks = [
                 {name: 'Заклади', link: '/restaurants'},
                 // {name: 'Акції', link: '/'},
-                {name: 'Про нас', link: '/'},
-                {name: 'Доставка та оплата', link: '/'},
+                {name: 'Про нас', link: '/about'},
+                {name: 'Доставка та оплата', link: '/delivery-and-payment'},
     ]
     const profileLinks = [
         {icon: <UserIcon className='w-[24px] text-dark-gray' />, name: 'Мій профіль', action: () => profileAction()},

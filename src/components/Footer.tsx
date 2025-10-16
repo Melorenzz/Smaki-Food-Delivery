@@ -11,30 +11,30 @@ const Footer = () => {
                         <div className='flex mt-[50px] lg:mt-0 flex-wrap gap-[80px] text-dark-gray font-semibold'>
                             <ul className='flex flex-col gap-[18px]'>
                                 <li>
-                                    <Link to='/restaurants'>
+                                    <Link className='border-b border-transparent hover:border-border-col hover:text-white-col transition' to='/restaurants'>
                                         Заклади
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to='/restaurants'>
+                                    <Link className='border-b border-transparent hover:border-border-col hover:text-white-col transition' to='/restaurants'>
                                         Акції
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to='/'>
+                                    <Link className='border-b border-transparent hover:border-border-col hover:text-white-col transition' to='/about'>
                                         Про нас
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to='/'>
+                                    <Link className='border-b border-transparent hover:border-border-col hover:text-white-col transition' to='/delivery-and-payment'>
                                         Доставка та оплата
                                     </Link>
                                 </li>
                             </ul>
                             <ul className='flex flex-col gap-[18px]'>
-                                <li>Політика використання cookies</li>
-                                <li>Договір публічної оферти</li>
-                                <li>Політика конфіденційності</li>
+                                <li className='border-b border-transparent hover:border-border-col hover:text-white-col transition'>Політика використання cookies</li>
+                                <li className='border-b border-transparent hover:border-border-col hover:text-white-col transition'>Договір публічної оферти</li>
+                                <li className='border-b border-transparent hover:border-border-col hover:text-white-col transition'>Політика конфіденційності</li>
                             </ul>
                         </div>
                     </div>
