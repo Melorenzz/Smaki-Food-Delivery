@@ -20,10 +20,19 @@ export interface IProductCard {
     name: string;
     price: number;
     quantityInBasket?: number | null;
-    restaurantId?: string;
     weight: number;
+    restaurantId?: string;
+    quantity?: number;
 }
 
+export interface IChangeQuantity {
+    id?: string;
+    quantity?: number | null;
+    restaurantId?: string;
+    productId?: string;
+    sessionId?: string;
+    quantityInBasket?: number;
+}
 interface address {
 
 }

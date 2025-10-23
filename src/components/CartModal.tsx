@@ -4,7 +4,7 @@ import Img from "./Img.tsx";
 import {Link, useLocation, useNavigate} from "react-router";
 import {useEffect, useRef, useState} from "react";
 import {useGetBasket} from "../hooks/useGetBasket.ts";
-import type {IProductCard} from "../types/types.ts";
+import type {IChangeQuantity, IProductCard} from "../types/types.ts";
 import {useBasketAction} from "../hooks/useBasketAction.ts";
 import toast from "react-hot-toast";
 
@@ -37,7 +37,7 @@ const CartModal = ({setIsOpenCart}:  {setIsOpenCart: (isOpenCart: boolean) => vo
 
     const { mutate } = useBasketAction();
 
-    const changeQuantityBd = (data) => {
+    const changeQuantityBd = (data: IChangeQuantity) => {
 
         mutate(
             {

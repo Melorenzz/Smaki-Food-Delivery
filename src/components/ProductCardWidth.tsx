@@ -1,4 +1,4 @@
-import type {IProductCard} from "../types/types.ts";
+import type { IProductCard} from "../types/types.ts";
 import Img from "./Img.tsx";
 import {PlusCircleIcon, CheckCircleIcon} from "@heroicons/react/24/outline";
 import {store} from "../store.ts";

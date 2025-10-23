@@ -1,5 +1,5 @@
 import Img from "../Img.tsx";
-import type {IProductCard} from "../../types/types.ts";
+import type {IChangeQuantity, IProductCard} from "../../types/types.ts";
 import {store} from "../../store.ts";
 import {useBasketAction} from "../../hooks/useBasketAction.ts";
 
@@ -21,7 +21,7 @@ const ProductCard = ({product}: {product: IProductCard}) => {
 
     const { mutate } = useBasketAction();
 
-    const changeQuantityBd = (data) => {
+    const changeQuantityBd = (data: IChangeQuantity) => {
 
         mutate(
             {

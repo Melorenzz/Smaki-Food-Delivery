@@ -1,5 +1,5 @@
 import {axiosInstance} from "./api/innterceptor.ts";
-import type {IProductCard} from "../types/types.ts";
+import type {IChangeQuantity} from "../types/types.ts";
 
 export const BasketService = {
     getBasket: async () => {
@@ -7,7 +7,7 @@ export const BasketService = {
         console.log('here', res.data.data);
         return res.data.data;
     },
-    basketAction: async (data: IProductCard) => {
+    basketAction: async (data: IChangeQuantity) => {
         const res = await axiosInstance.post('/basket/actions-basket', data);
         return res.data.data;
     }

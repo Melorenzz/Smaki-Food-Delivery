@@ -10,7 +10,7 @@ import {useGetBasket} from "../hooks/useGetBasket.ts";
 import MainLayout from "../layouts/MainLayout.tsx";
 import ProductsFromSameRestaurant from "../components/product/ProductsFromSameRestaurant.tsx";
 import toast from "react-hot-toast";
-import type {IProductCard} from "../types/types.ts";
+import type { IProductCard} from "../types/types.ts";
 
 const ProductPage = () => {
     const pathname = useLocation().pathname;
